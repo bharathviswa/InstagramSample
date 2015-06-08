@@ -12,4 +12,27 @@
 
 @implementation VASNetworkManager
 
++ (instancetype)sharedInstance
+{
+    static VASNetworkManager *sharedInstance;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (void)requestUserInfoFromServerWithSuccess:(CompletionBlockWithSuccess)success
+                                     failure:(CompletionBlockWithFailure)failure
+{
+    
+}
+
+- (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
+                                      failure:(CompletionBlockWithFailure)failure
+{
+    
+}
+
 @end

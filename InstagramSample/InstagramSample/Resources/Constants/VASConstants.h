@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kInstagramMyUserID;
 extern NSString *const kInstagramAPIClientID;
 extern NSString *const kInstagramAPIClientSecret;
 extern NSString *const kInstagramBaseAPIUrl;

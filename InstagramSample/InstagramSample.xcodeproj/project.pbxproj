@@ -19,7 +19,7 @@
 		B71BCDE21B2606BA00EDD4E5 /* VASResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE11B2606BA00EDD4E5 /* VASResourceManager.m */; };
 		B71BCDE61B26077100EDD4E5 /* VASAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */; };
 		B71BCDE91B2607BC00EDD4E5 /* VASConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */; };
-		B71BCDED1B26172700EDD4E5 /* VASStartController.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDEC1B26172700EDD4E5 /* VASStartController.m */; };
+		B759545D1B26468F00E4731A /* VASUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B759545C1B26468F00E4731A /* VASUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +56,8 @@
 		B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASAuthManager.m; path = AuthManager/VASAuthManager.m; sourceTree = "<group>"; };
 		B71BCDE71B2607BC00EDD4E5 /* VASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASConstants.h; sourceTree = "<group>"; };
 		B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASConstants.m; sourceTree = "<group>"; };
-		B71BCDEB1B26172700EDD4E5 /* VASStartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASStartController.h; path = StartController/VASStartController.h; sourceTree = "<group>"; };
-		B71BCDEC1B26172700EDD4E5 /* VASStartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASStartController.m; path = StartController/VASStartController.m; sourceTree = "<group>"; };
+		B759545B1B26468F00E4731A /* VASUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASUser.h; sourceTree = "<group>"; };
+		B759545C1B26468F00E4731A /* VASUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +196,8 @@
 		B71BCDC11B26043400EDD4E5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B759545B1B26468F00E4731A /* VASUser.h */,
+				B759545C1B26468F00E4731A /* VASUser.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -252,7 +254,6 @@
 		B71BCDCC1B26043400EDD4E5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B71BCDEA1B2616F600EDD4E5 /* StartController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -315,15 +316,6 @@
 				B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */,
 			);
 			name = AuthManager;
-			sourceTree = "<group>";
-		};
-		B71BCDEA1B2616F600EDD4E5 /* StartController */ = {
-			isa = PBXGroup;
-			children = (
-				B71BCDEB1B26172700EDD4E5 /* VASStartController.h */,
-				B71BCDEC1B26172700EDD4E5 /* VASStartController.m */,
-			);
-			name = StartController;
 			sourceTree = "<group>";
 		};
 		F431C942AF68E82403323186 /* Frameworks */ = {
@@ -472,10 +464,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71BCDE21B2606BA00EDD4E5 /* VASResourceManager.m in Sources */,
-				B71BCDED1B26172700EDD4E5 /* VASStartController.m in Sources */,
 				B71BCDE61B26077100EDD4E5 /* VASAuthManager.m in Sources */,
 				B71BCDE91B2607BC00EDD4E5 /* VASConstants.m in Sources */,
 				B71BCDDB1B26043400EDD4E5 /* main.m in Sources */,
+				B759545D1B26468F00E4731A /* VASUser.m in Sources */,
 				B71BCDDF1B26069100EDD4E5 /* VASNetworkManager.m in Sources */,
 				B71BCDD61B26043400EDD4E5 /* AppDelegate.m in Sources */,
 			);
