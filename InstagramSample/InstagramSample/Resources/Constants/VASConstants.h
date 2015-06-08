@@ -10,4 +10,5 @@
 
 extern NSString *const kInstagramAPIClientID;
 extern NSString *const kInstagramAPIClientSecret;
-extern NSString *const lInstagramBaseAPIUrl;
+extern NSString *const kInstagramBaseAPIUrl;
+extern NSString *const kInstagramAPIRedirectUrl;

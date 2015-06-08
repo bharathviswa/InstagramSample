@@ -15,5 +15,6 @@
 #import "ReactiveCocoa.h"
 #import "Mantle.h"
 #import "VASConstants.h"
+#import "SimpleAuth.h"
 
 #endif
