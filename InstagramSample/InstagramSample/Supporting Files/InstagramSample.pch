@@ -1,0 +1,19 @@
+//
+//  InstagramSample.pch
+//  InstagramSample
+//
+//  Created by Igor Vasilenko on 08/06/15.
+//  Copyright (c) 2015 Igor Vasilenko. All rights reserved.
+//
+
+#ifndef InstagramSample_InstagramSample_pch
+#define InstagramSample_InstagramSample_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "ReactiveCocoa.h"
+#import "Mantle.h"
+#import "VASConstants.h"
+
+#endif
