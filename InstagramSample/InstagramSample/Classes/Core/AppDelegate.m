@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 
-#import <SimpleAuth/SimpleAuth.h>
+#import "VASTemplateRequest.h"
+#import "VASNetworkRequestManager.h"
+#import "VASMedia.h"
 
 @interface AppDelegate ()
 
@@ -20,12 +22,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    SimpleAuth.configuration[@"instagram"] = @{
-                                             @"client_id" : kInstagramAPIClientID,
-                                             SimpleAuthRedirectURIKey : kInstagramAPIRedirectUrl
-                                             };
-
+    VASTemplateRequest *requestTemplate = [[VASTemplateRequest alloc] initWithBaseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]];
+    [requestTemplate setResponseClass:[VASMedia class]];
+    [requestTemplate setMethod:@"media/recent"];
+    [requestTemplate setParameters:@{@"client_id" : kInstagramAPIClientID}];
     
+    VASNetworkRequestManager *manager = [[VASNetworkRequestManager alloc] initWithRequestTemplate:requestTemplate];
+    
+    [manager sendGETWithSuccess:^(id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
     return YES;
 }
 

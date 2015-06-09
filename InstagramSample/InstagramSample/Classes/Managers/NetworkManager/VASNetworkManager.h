@@ -10,6 +10,9 @@
 
 #define NetworkManager [VASNetworkManager sharedInstance]
 
+@class VASUser;
+
+typedef void(^UserInfoCompletionBlockWithSuccess)(VASUser *user);
 typedef void(^CompletionBlockWithSuccess)(NSArray *data);
 typedef void(^CompletionBlockWithFailure)(NSError *error);
 
@@ -17,8 +20,8 @@ typedef void(^CompletionBlockWithFailure)(NSError *error);
 
 + (instancetype)sharedInstance;
 
-- (void)requestUserInfoFromServerWithSuccess:(CompletionBlockWithSuccess)success
-                                     failure:(CompletionBlockWithFailure)failure;
+- (void)requestUserInfoWithSuccess:(UserInfoCompletionBlockWithSuccess)success
+                           failure:(CompletionBlockWithFailure)failure;
 - (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
                                       failure:(CompletionBlockWithFailure)failure;
 

@@ -16,10 +16,14 @@
 		B71BCDDA1B26043400EDD4E5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B71BCDD41B26043400EDD4E5 /* Info.plist */; };
 		B71BCDDB1B26043400EDD4E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDD51B26043400EDD4E5 /* main.m */; };
 		B71BCDDF1B26069100EDD4E5 /* VASNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */; };
-		B71BCDE21B2606BA00EDD4E5 /* VASResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE11B2606BA00EDD4E5 /* VASResourceManager.m */; };
-		B71BCDE61B26077100EDD4E5 /* VASAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */; };
 		B71BCDE91B2607BC00EDD4E5 /* VASConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */; };
 		B759545D1B26468F00E4731A /* VASUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B759545C1B26468F00E4731A /* VASUser.m */; };
+		B76504241B26E3D00031D4B4 /* VASHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504231B26E3D00031D4B4 /* VASHomePageController.m */; };
+		B76504271B26E4050031D4B4 /* VASHomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504261B26E4050031D4B4 /* VASHomePageViewModel.m */; };
+		B765042C1B27094C0031D4B4 /* VASNetworkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B765042B1B27094C0031D4B4 /* VASNetworkRequestManager.m */; };
+		B76504381B2718DE0031D4B4 /* VASTemplateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504371B2718DE0031D4B4 /* VASTemplateRequest.m */; };
+		B765043B1B2741C60031D4B4 /* VASMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = B765043A1B2741C60031D4B4 /* VASMedia.m */; };
+		B76504411B274C9F0031D4B4 /* VASComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504401B274C9F0031D4B4 /* VASComment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,14 +54,22 @@
 		B71BCDDC1B2604A200EDD4E5 /* InstagramSample.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramSample.pch; sourceTree = "<group>"; };
 		B71BCDDD1B26069100EDD4E5 /* VASNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASNetworkManager.h; sourceTree = "<group>"; };
 		B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASNetworkManager.m; sourceTree = "<group>"; };
-		B71BCDE01B2606BA00EDD4E5 /* VASResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASResourceManager.h; sourceTree = "<group>"; };
-		B71BCDE11B2606BA00EDD4E5 /* VASResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASResourceManager.m; sourceTree = "<group>"; };
-		B71BCDE41B26077100EDD4E5 /* VASAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASAuthManager.h; path = AuthManager/VASAuthManager.h; sourceTree = "<group>"; };
-		B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASAuthManager.m; path = AuthManager/VASAuthManager.m; sourceTree = "<group>"; };
 		B71BCDE71B2607BC00EDD4E5 /* VASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASConstants.h; sourceTree = "<group>"; };
 		B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASConstants.m; sourceTree = "<group>"; };
 		B759545B1B26468F00E4731A /* VASUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASUser.h; sourceTree = "<group>"; };
 		B759545C1B26468F00E4731A /* VASUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASUser.m; sourceTree = "<group>"; };
+		B76504221B26E3D00031D4B4 /* VASHomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASHomePageController.h; path = HomePageController/VASHomePageController.h; sourceTree = "<group>"; };
+		B76504231B26E3D00031D4B4 /* VASHomePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASHomePageController.m; path = HomePageController/VASHomePageController.m; sourceTree = "<group>"; };
+		B76504251B26E4050031D4B4 /* VASHomePageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASHomePageViewModel.h; path = HomePageViewModel/VASHomePageViewModel.h; sourceTree = "<group>"; };
+		B76504261B26E4050031D4B4 /* VASHomePageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASHomePageViewModel.m; path = HomePageViewModel/VASHomePageViewModel.m; sourceTree = "<group>"; };
+		B765042A1B27094C0031D4B4 /* VASNetworkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASNetworkRequestManager.h; path = NetworkFlow/VASNetworkRequestManager.h; sourceTree = "<group>"; };
+		B765042B1B27094C0031D4B4 /* VASNetworkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASNetworkRequestManager.m; path = NetworkFlow/VASNetworkRequestManager.m; sourceTree = "<group>"; };
+		B76504361B2718DE0031D4B4 /* VASTemplateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASTemplateRequest.h; path = NetworkFlow/VASTemplateRequest.h; sourceTree = "<group>"; };
+		B76504371B2718DE0031D4B4 /* VASTemplateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASTemplateRequest.m; path = NetworkFlow/VASTemplateRequest.m; sourceTree = "<group>"; };
+		B76504391B2741C60031D4B4 /* VASMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASMedia.h; sourceTree = "<group>"; };
+		B765043A1B2741C60031D4B4 /* VASMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASMedia.m; sourceTree = "<group>"; };
+		B765043F1B274C9F0031D4B4 /* VASComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASComment.h; sourceTree = "<group>"; };
+		B76504401B274C9F0031D4B4 /* VASComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASComment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +171,8 @@
 		B71BCDBD1B26043400EDD4E5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				B71BCDE31B26074700EDD4E5 /* AuthManager */,
+				B76504281B2706C30031D4B4 /* NetworkFlow */,
 				B71BCDBE1B26043400EDD4E5 /* NetworkManager */,
-				B71BCDBF1B26043400EDD4E5 /* ResourceManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -173,15 +184,6 @@
 				B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		B71BCDBF1B26043400EDD4E5 /* ResourceManager */ = {
-			isa = PBXGroup;
-			children = (
-				B71BCDE01B2606BA00EDD4E5 /* VASResourceManager.h */,
-				B71BCDE11B2606BA00EDD4E5 /* VASResourceManager.m */,
-			);
-			path = ResourceManager;
 			sourceTree = "<group>";
 		};
 		B71BCDC01B26043400EDD4E5 /* Model */ = {
@@ -198,6 +200,10 @@
 			children = (
 				B759545B1B26468F00E4731A /* VASUser.h */,
 				B759545C1B26468F00E4731A /* VASUser.m */,
+				B76504391B2741C60031D4B4 /* VASMedia.h */,
+				B765043A1B2741C60031D4B4 /* VASMedia.m */,
+				B765043F1B274C9F0031D4B4 /* VASComment.h */,
+				B76504401B274C9F0031D4B4 /* VASComment.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -221,6 +227,8 @@
 		B71BCDC41B26043400EDD4E5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B76504251B26E4050031D4B4 /* VASHomePageViewModel.h */,
+				B76504261B26E4050031D4B4 /* VASHomePageViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,6 +262,8 @@
 		B71BCDCC1B26043400EDD4E5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B76504221B26E3D00031D4B4 /* VASHomePageController.h */,
+				B76504231B26E3D00031D4B4 /* VASHomePageController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -309,13 +319,15 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B71BCDE31B26074700EDD4E5 /* AuthManager */ = {
+		B76504281B2706C30031D4B4 /* NetworkFlow */ = {
 			isa = PBXGroup;
 			children = (
-				B71BCDE41B26077100EDD4E5 /* VASAuthManager.h */,
-				B71BCDE51B26077100EDD4E5 /* VASAuthManager.m */,
+				B76504361B2718DE0031D4B4 /* VASTemplateRequest.h */,
+				B76504371B2718DE0031D4B4 /* VASTemplateRequest.m */,
+				B765042A1B27094C0031D4B4 /* VASNetworkRequestManager.h */,
+				B765042B1B27094C0031D4B4 /* VASNetworkRequestManager.m */,
 			);
-			name = AuthManager;
+			name = NetworkFlow;
 			sourceTree = "<group>";
 		};
 		F431C942AF68E82403323186 /* Frameworks */ = {
@@ -463,12 +475,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B71BCDE21B2606BA00EDD4E5 /* VASResourceManager.m in Sources */,
-				B71BCDE61B26077100EDD4E5 /* VASAuthManager.m in Sources */,
+				B76504381B2718DE0031D4B4 /* VASTemplateRequest.m in Sources */,
 				B71BCDE91B2607BC00EDD4E5 /* VASConstants.m in Sources */,
 				B71BCDDB1B26043400EDD4E5 /* main.m in Sources */,
+				B765042C1B27094C0031D4B4 /* VASNetworkRequestManager.m in Sources */,
 				B759545D1B26468F00E4731A /* VASUser.m in Sources */,
 				B71BCDDF1B26069100EDD4E5 /* VASNetworkManager.m in Sources */,
+				B76504271B26E4050031D4B4 /* VASHomePageViewModel.m in Sources */,
+				B765043B1B2741C60031D4B4 /* VASMedia.m in Sources */,
+				B76504411B274C9F0031D4B4 /* VASComment.m in Sources */,
+				B76504241B26E3D00031D4B4 /* VASHomePageController.m in Sources */,
 				B71BCDD61B26043400EDD4E5 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
