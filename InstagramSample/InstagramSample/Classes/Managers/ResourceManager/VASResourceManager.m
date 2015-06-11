@@ -12,6 +12,7 @@
 #import "VASNetworkRequestManager.h"
 #import "VASUser.h"
 #import "VASMedia.h"
+#import "VASAPIConfigurator.h"
 
 static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 
@@ -27,6 +28,11 @@ static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 {
     if (self = [super init])
     {
+        VASAPIConfigurator *configurator = [[VASAPIConfigurator alloc] init];
+        configurator.clientID = kInstagramAPIClientID;
+        configurator.clientSecret = kInstagramAPIClientSecret;
+        configurator.baseURL = [NSURL URLWithString:kInstagramBaseAPIUrl];
+        
         _manager = [[VASNetworkRequestManager alloc] initWithBaseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]
                                                baseRequestParameters:@{
                                                                        @"client_id" : kInstagramAPIClientID

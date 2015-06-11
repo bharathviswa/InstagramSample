@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InstagramSample/Classes/Managers/NetworkRequestManager/VASNetworkRequestManager.m"
-            timestampString = "455735291.326515"
+            filePath = "InstagramSample/Classes/Managers/NetworkRequestManager/VASSessionManager.m"
+            timestampString = "455738931.698353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-sendGetRequestWithMethod:parameters:resultClass:success:failure:"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-setResultClassForResponse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

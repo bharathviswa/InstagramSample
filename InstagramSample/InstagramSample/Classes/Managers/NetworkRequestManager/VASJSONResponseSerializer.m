@@ -54,11 +54,4 @@
     return self.resultResponseObject;
 }
 
-- (void)setResultClass:(Class)resultClass
-{
-    if (resultClass) {
-        _resultClass = resultClass;
-    }
-}
-
 @end

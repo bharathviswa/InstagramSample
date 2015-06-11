@@ -25,6 +25,7 @@
 		B7D578FF1B29BD1A00D4F541 /* VASNetworkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D578FD1B29BD1A00D4F541 /* VASNetworkRequestManager.m */; };
 		B7D579031B29C01B00D4F541 /* VASResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D579021B29C01B00D4F541 /* VASResourceManager.m */; };
 		B7D579061B29EB0400D4F541 /* VASSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D579051B29EB0400D4F541 /* VASSessionManager.m */; };
+		B7D579091B29F9B300D4F541 /* VASAPIConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D579081B29F9B300D4F541 /* VASAPIConfigurator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		B7D579021B29C01B00D4F541 /* VASResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASResourceManager.m; sourceTree = "<group>"; };
 		B7D579041B29EB0400D4F541 /* VASSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASSessionManager.h; sourceTree = "<group>"; };
 		B7D579051B29EB0400D4F541 /* VASSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASSessionManager.m; sourceTree = "<group>"; };
+		B7D579071B29F9B300D4F541 /* VASAPIConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASAPIConfigurator.h; sourceTree = "<group>"; };
+		B7D579081B29F9B300D4F541 /* VASAPIConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASAPIConfigurator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,10 +321,12 @@
 			children = (
 				B7D578FC1B29BD1A00D4F541 /* VASNetworkRequestManager.h */,
 				B7D578FD1B29BD1A00D4F541 /* VASNetworkRequestManager.m */,
-				B7D578FA1B29BD1A00D4F541 /* VASJSONResponseSerializer.h */,
-				B7D578FB1B29BD1A00D4F541 /* VASJSONResponseSerializer.m */,
 				B7D579041B29EB0400D4F541 /* VASSessionManager.h */,
 				B7D579051B29EB0400D4F541 /* VASSessionManager.m */,
+				B7D578FA1B29BD1A00D4F541 /* VASJSONResponseSerializer.h */,
+				B7D578FB1B29BD1A00D4F541 /* VASJSONResponseSerializer.m */,
+				B7D579071B29F9B300D4F541 /* VASAPIConfigurator.h */,
+				B7D579081B29F9B300D4F541 /* VASAPIConfigurator.m */,
 			);
 			path = NetworkRequestManager;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				B7D578FE1B29BD1A00D4F541 /* VASJSONResponseSerializer.m in Sources */,
 				B76504271B26E4050031D4B4 /* VASHomePageViewModel.m in Sources */,
 				B7D579031B29C01B00D4F541 /* VASResourceManager.m in Sources */,
+				B7D579091B29F9B300D4F541 /* VASAPIConfigurator.m in Sources */,
 				B7D578FF1B29BD1A00D4F541 /* VASNetworkRequestManager.m in Sources */,
 				B765043B1B2741C60031D4B4 /* VASMedia.m in Sources */,
 				B76504411B274C9F0031D4B4 /* VASComment.m in Sources */,

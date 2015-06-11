@@ -12,6 +12,4 @@
 
 - (instancetype)initWithResultClass:(Class)resultClass;
 
-- (void)setResultClass:(Class)resultClass;
-
 @end
