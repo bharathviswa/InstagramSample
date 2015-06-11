@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) NSMutableDictionary *baseRequestParameters;
 @property (nonatomic, strong) NSURLSessionConfiguration *sessionConfig;
+@property (nonatomic, strong) NSMutableArray *responseSerializers;
+@property (nonatomic, strong) AFURLSessionManager *sessionManager;
 
 @end
 
@@ -30,29 +32,33 @@
         _baseURL = baseURL;
         _baseRequestParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
         
+        _responseSerializers = [@[] mutableCopy];
         _sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:self.sessionConfig];
     }
     return self;
 }
 
 #pragma mark - Request's
 
-- (void)sendGetRequestWithMethod:(NSString *)method
-                      parameters:(NSDictionary *)parameters
-                     resultClass:(Class)resultClass
-                         success:(NetworkRequestCompletionBlockWithSuccess)success
-                         failure:(NetworkRequestCompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)sendGetRequestWithMethod:(NSString *)method
+                                        parameters:(NSDictionary *)parameters
+                                       resultClass:(Class)resultClass
+                                           success:(NetworkRequestCompletionBlockWithSuccess)success
+                                           failure:(NetworkRequestCompletionBlockWithFailure)failure
 {
-    AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:self.sessionConfig];
     VASJSONResponseSerializer *responseSerializer = [[VASJSONResponseSerializer alloc] initWithResultClass:resultClass];
-    sessionManager.responseSerializer = responseSerializer;
+    [self.responseSerializers addObject:responseSerializer];
+    AFCompoundResponseSerializer *compoundResponseSerializer = [AFCompoundResponseSerializer compoundSerializerWithResponseSerializers:self.responseSerializers];
+    _sessionManager.responseSerializer = compoundResponseSerializer;
     
     [self.baseRequestParameters addEntriesFromDictionary:parameters];
     NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
                                                                              URLString:[[NSURL URLWithString:method? : @"" relativeToURL:self.baseURL] absoluteString]
                                                                             parameters:self.baseRequestParameters
                                                                                  error:NULL];
-    NSURLSessionDataTask *dataTask = [sessionManager dataTaskWithRequest:urlRequest
+    
+    NSURLSessionDataTask *dataTask = [_sessionManager dataTaskWithRequest:urlRequest
                                                        completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                                                            if (responseObject) {
                                                                if (success)
@@ -64,6 +70,8 @@
                                                            }
                                                        }];
     [dataTask resume];
+    
+    return dataTask;
 }
 
 @end
