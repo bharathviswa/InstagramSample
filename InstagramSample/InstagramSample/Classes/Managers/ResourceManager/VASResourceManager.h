@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class VASUser;
-
 typedef void(^CompletionBlockWithSuccess)(id responseObject);
 typedef void(^CompletionBlockWithFailure)(NSError *error);
 
-@interface VASNetworkManager : NSObject
+@interface VASResourceManager : NSObject
 
 - (void)requestUserInfoWithSuccess:(CompletionBlockWithSuccess)success
                            failure:(CompletionBlockWithFailure)failure;

@@ -15,7 +15,6 @@
 		B71BCDD91B26043400EDD4E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B71BCDD21B26043400EDD4E5 /* Images.xcassets */; };
 		B71BCDDA1B26043400EDD4E5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B71BCDD41B26043400EDD4E5 /* Info.plist */; };
 		B71BCDDB1B26043400EDD4E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDD51B26043400EDD4E5 /* main.m */; };
-		B71BCDDF1B26069100EDD4E5 /* VASNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */; };
 		B71BCDE91B2607BC00EDD4E5 /* VASConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */; };
 		B759545D1B26468F00E4731A /* VASUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B759545C1B26468F00E4731A /* VASUser.m */; };
 		B76504241B26E3D00031D4B4 /* VASHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504231B26E3D00031D4B4 /* VASHomePageController.m */; };
@@ -24,6 +23,7 @@
 		B76504411B274C9F0031D4B4 /* VASComment.m in Sources */ = {isa = PBXBuildFile; fileRef = B76504401B274C9F0031D4B4 /* VASComment.m */; };
 		B7D578FE1B29BD1A00D4F541 /* VASJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D578FB1B29BD1A00D4F541 /* VASJSONResponseSerializer.m */; };
 		B7D578FF1B29BD1A00D4F541 /* VASNetworkRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D578FD1B29BD1A00D4F541 /* VASNetworkRequestManager.m */; };
+		B7D579031B29C01B00D4F541 /* VASResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D579021B29C01B00D4F541 /* VASResourceManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,6 @@
 		B71BCDD41B26043400EDD4E5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B71BCDD51B26043400EDD4E5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B71BCDDC1B2604A200EDD4E5 /* InstagramSample.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramSample.pch; sourceTree = "<group>"; };
-		B71BCDDD1B26069100EDD4E5 /* VASNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASNetworkManager.h; sourceTree = "<group>"; };
-		B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASNetworkManager.m; sourceTree = "<group>"; };
 		B71BCDE71B2607BC00EDD4E5 /* VASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASConstants.h; sourceTree = "<group>"; };
 		B71BCDE81B2607BC00EDD4E5 /* VASConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASConstants.m; sourceTree = "<group>"; };
 		B759545B1B26468F00E4731A /* VASUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASUser.h; sourceTree = "<group>"; };
@@ -70,6 +68,8 @@
 		B7D578FB1B29BD1A00D4F541 /* VASJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASJSONResponseSerializer.m; sourceTree = "<group>"; };
 		B7D578FC1B29BD1A00D4F541 /* VASNetworkRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASNetworkRequestManager.h; sourceTree = "<group>"; };
 		B7D578FD1B29BD1A00D4F541 /* VASNetworkRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASNetworkRequestManager.m; sourceTree = "<group>"; };
+		B7D579011B29C01B00D4F541 /* VASResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASResourceManager.h; sourceTree = "<group>"; };
+		B7D579021B29C01B00D4F541 /* VASResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASResourceManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,18 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				B7D578F91B29BD1A00D4F541 /* NetworkRequestManager */,
-				B71BCDBE1B26043400EDD4E5 /* NetworkManager */,
+				B7D579001B29C01B00D4F541 /* ResourceManager */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		B71BCDBE1B26043400EDD4E5 /* NetworkManager */ = {
-			isa = PBXGroup;
-			children = (
-				B71BCDDD1B26069100EDD4E5 /* VASNetworkManager.h */,
-				B71BCDDE1B26069100EDD4E5 /* VASNetworkManager.m */,
-			);
-			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		B71BCDC01B26043400EDD4E5 /* Model */ = {
@@ -328,6 +319,15 @@
 				B7D578FB1B29BD1A00D4F541 /* VASJSONResponseSerializer.m */,
 			);
 			path = NetworkRequestManager;
+			sourceTree = "<group>";
+		};
+		B7D579001B29C01B00D4F541 /* ResourceManager */ = {
+			isa = PBXGroup;
+			children = (
+				B7D579011B29C01B00D4F541 /* VASResourceManager.h */,
+				B7D579021B29C01B00D4F541 /* VASResourceManager.m */,
+			);
+			path = ResourceManager;
 			sourceTree = "<group>";
 		};
 		F431C942AF68E82403323186 /* Frameworks */ = {
@@ -479,8 +479,8 @@
 				B71BCDDB1B26043400EDD4E5 /* main.m in Sources */,
 				B759545D1B26468F00E4731A /* VASUser.m in Sources */,
 				B7D578FE1B29BD1A00D4F541 /* VASJSONResponseSerializer.m in Sources */,
-				B71BCDDF1B26069100EDD4E5 /* VASNetworkManager.m in Sources */,
 				B76504271B26E4050031D4B4 /* VASHomePageViewModel.m in Sources */,
+				B7D579031B29C01B00D4F541 /* VASResourceManager.m in Sources */,
 				B7D578FF1B29BD1A00D4F541 /* VASNetworkRequestManager.m in Sources */,
 				B765043B1B2741C60031D4B4 /* VASMedia.m in Sources */,
 				B76504411B274C9F0031D4B4 /* VASComment.m in Sources */,

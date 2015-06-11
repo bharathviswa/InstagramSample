@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Igor Vasilenko. All rights reserved.
 //
 
-#import "VASNetworkManager.h"
+#import "VASResourceManager.h"
 
 #import "AFNetworking.h"
 #import "VASNetworkRequestManager.h"
@@ -15,13 +15,13 @@
 
 static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 
-@interface VASNetworkManager()
+@interface VASResourceManager()
 
 @property (nonatomic, strong) VASNetworkRequestManager *manager;
 
 @end
 
-@implementation VASNetworkManager
+@implementation VASResourceManager
 
 - (instancetype)init
 {
@@ -40,7 +40,7 @@ static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 {
     [self.manager sendGetRequestWithMethod:nil
                                 parameters:nil
-                             resultClass:[VASUser class]
+                               resultClass:[VASUser class]
                                    success:^(id responseObject) {
                                        if (responseObject) {
                                            if (success)
@@ -57,7 +57,7 @@ static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 {
     [self.manager sendGetRequestWithMethod:kUserRecentMediaAPIMethod
                                 parameters:nil
-                             resultClass:[VASMedia class]
+                               resultClass:[VASMedia class]
                                    success:^(id responseObject) {
                                        if (responseObject) {
                                            if (success)

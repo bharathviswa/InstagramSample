@@ -8,12 +8,12 @@
 
 #import "VASHomePageViewModel.h"
 
-#import "VASNetworkManager.h"
+#import "VASResourceManager.h"
 #import "VASUser.h"
 
 @interface VASHomePageViewModel()
 
-@property (nonatomic, strong) VASNetworkManager *networkManager;
+@property (nonatomic, strong) VASResourceManager *resourceManager;
 
 @end
 
@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-        self.networkManager = [[VASNetworkManager alloc] init];
+        self.resourceManager = [[VASResourceManager alloc] init];
         [self loadData];
     }
     return self;
@@ -32,7 +32,7 @@
 - (void)loadData
 {
     @weakify(self);
-    [self.networkManager requestUserInfoWithSuccess:^(VASUser *user) {
+    [self.resourceManager requestUserInfoWithSuccess:^(VASUser *user) {
         @strongify(self);
         
         if (user) {
@@ -55,7 +55,7 @@
         }
     }];
     
-    [self.networkManager requestRecentUserMediaListWithSuccess:^(NSArray *data) {
+    [self.resourceManager requestRecentUserMediaListWithSuccess:^(NSArray *data) {
         
         NSLog(@"%@", data);
     } failure:^(NSError *error) {

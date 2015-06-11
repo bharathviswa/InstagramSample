@@ -22,7 +22,7 @@ typedef void(^NetworkRequestCompletionBlockWithFailure)(NSError *error);
 
 - (void)sendGetRequestWithMethod:(NSString *)method
                       parameters:(NSDictionary *)parameters
-                   resultClass:(Class)resultClass
+                     resultClass:(Class)resultClass
                          success:(NetworkRequestCompletionBlockWithSuccess)success
                          failure:(NetworkRequestCompletionBlockWithFailure)failure;
 
