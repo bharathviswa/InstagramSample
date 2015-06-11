@@ -48,7 +48,7 @@
     }
     else
     {
-        self.resultResponseObject = responseObject;
+        return responseObject;
     }
     
     return self.resultResponseObject;

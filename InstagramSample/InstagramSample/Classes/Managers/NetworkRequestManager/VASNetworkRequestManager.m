@@ -39,7 +39,7 @@
 
 - (void)sendGetRequestWithMethod:(NSString *)method
                       parameters:(NSDictionary *)parameters
-                   resultClass:(Class)resultClass
+                     resultClass:(Class)resultClass
                          success:(NetworkRequestCompletionBlockWithSuccess)success
                          failure:(NetworkRequestCompletionBlockWithFailure)failure
 {
@@ -52,7 +52,6 @@
                                                                              URLString:[[NSURL URLWithString:method? : @"" relativeToURL:self.baseURL] absoluteString]
                                                                             parameters:self.baseRequestParameters
                                                                                  error:NULL];
-    
     NSURLSessionDataTask *dataTask = [sessionManager dataTaskWithRequest:urlRequest
                                                        completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                                                            if (responseObject) {
