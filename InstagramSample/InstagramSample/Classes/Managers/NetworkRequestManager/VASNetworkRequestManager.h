@@ -20,10 +20,10 @@ typedef void(^NetworkRequestCompletionBlockWithFailure)(NSError *error);
 
 #pragma mark - Request's
 
-- (NSURLSessionDataTask *)sendGetRequestWithMethod:(NSString *)method
-                                        parameters:(NSDictionary *)parameters
-                                       resultClass:(Class)resultClass
-                                           success:(NetworkRequestCompletionBlockWithSuccess)success
-                                           failure:(NetworkRequestCompletionBlockWithFailure)failure;
+- (void)sendGetRequestWithMethod:(NSString *)method
+                      parameters:(NSDictionary *)parameters
+                     resultClass:(Class)resultClass
+                         success:(NetworkRequestCompletionBlockWithSuccess)success
+                         failure:(NetworkRequestCompletionBlockWithFailure)failure;
 
 @end

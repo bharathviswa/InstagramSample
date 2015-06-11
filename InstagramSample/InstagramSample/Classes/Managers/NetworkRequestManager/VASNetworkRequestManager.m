@@ -10,12 +10,12 @@
 
 #import "AFNetworking.h"
 #import "VASJSONResponseSerializer.h"
-#import "VASSessionManager.h"
 
 @interface VASNetworkRequestManager()
 
 @property (nonatomic, strong) NSURL *baseURL;
-@property (nonatomic, strong) VASSessionManager *sessionManager;
+@property (nonatomic, strong) NSMutableDictionary *baseRequestParameters;
+@property (nonatomic, strong) NSURLSessionConfiguration *sessionConfig;
 
 @end
 
@@ -28,38 +28,43 @@
 {
     if (self = [super init]) {
         _baseURL = baseURL;
+        _baseRequestParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
         
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _sessionManager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfig baseAPICongiguration:@{}];
+        _sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     }
     return self;
 }
 
 #pragma mark - Request's
 
-- (NSURLSessionDataTask *)sendGetRequestWithMethod:(NSString *)method
-                                        parameters:(NSDictionary *)parameters
-                                       resultClass:(Class)resultClass
-                                           success:(NetworkRequestCompletionBlockWithSuccess)success
-                                           failure:(NetworkRequestCompletionBlockWithFailure)failure
+- (void)sendGetRequestWithMethod:(NSString *)method
+                      parameters:(NSDictionary *)parameters
+                     resultClass:(Class)resultClass
+                         success:(NetworkRequestCompletionBlockWithSuccess)success
+                         failure:(NetworkRequestCompletionBlockWithFailure)failure
 {
-    [self.sessionManager setResultClassForResponse:resultClass];
+    AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:self.sessionConfig];
+    VASJSONResponseSerializer *responseSerializer = [[VASJSONResponseSerializer alloc] initWithResultClass:resultClass];
+    sessionManager.responseSerializer = responseSerializer;
     
-    NSURLSessionDataTask *dataTask = [self.sessionManager dataTaskWithGETMethod:method
-                                                                     parameters:parameters
-                                                              completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                                                  if (responseObject) {
-                                                                      if (success)
-                                                                          success(responseObject);
-                                                                  }
-                                                                  if (error) {
-                                                                      if (failure)
-                                                                          failure(error);
-                                                                  }
-                                                              }];
+    [self.baseRequestParameters addEntriesFromDictionary:parameters];
+    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                             URLString:[[NSURL URLWithString:method? : @"" relativeToURL:self.baseURL] absoluteString]
+                                                                            parameters:self.baseRequestParameters
+                                                                                 error:NULL];
+    NSURLSessionDataTask *dataTask = [sessionManager dataTaskWithRequest:urlRequest
+                                                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                                           if (responseObject) {
+                                                               if (success)
+                                                                   success(responseObject);
+                                                           }
+                                                           if (error) {
+                                                               
+                                                               if (failure)
+                                                                   failure(error);
+                                                           }
+                                                       }];
     [dataTask resume];
-    
-    return dataTask;
 }
 
 @end
