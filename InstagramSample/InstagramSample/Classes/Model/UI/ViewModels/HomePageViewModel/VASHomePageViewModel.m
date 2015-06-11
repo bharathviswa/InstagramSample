@@ -11,12 +11,19 @@
 #import "VASNetworkManager.h"
 #import "VASUser.h"
 
+@interface VASHomePageViewModel()
+
+@property (nonatomic, strong) VASNetworkManager *networkManager;
+
+@end
+
 @implementation VASHomePageViewModel
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        self.networkManager = [[VASNetworkManager alloc] init];
         [self loadData];
     }
     return self;
@@ -24,7 +31,10 @@
 
 - (void)loadData
 {
-    [NetworkManager requestUserInfoWithSuccess:^(VASUser *user) {
+    @weakify(self);
+    [self.networkManager requestUserInfoWithSuccess:^(VASUser *user) {
+        @strongify(self);
+        
         if (user) {
             self.user = user;
             
@@ -43,6 +53,13 @@
         if (error) {
             
         }
+    }];
+    
+    [self.networkManager requestRecentUserMediaListWithSuccess:^(NSArray *data) {
+        
+        NSLog(@"%@", data);
+    } failure:^(NSError *error) {
+        
     }];
 }
 

@@ -8,19 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#define NetworkManager [VASNetworkManager sharedInstance]
-
 @class VASUser;
 
-typedef void(^UserInfoCompletionBlockWithSuccess)(VASUser *user);
-typedef void(^CompletionBlockWithSuccess)(NSArray *data);
+typedef void(^CompletionBlockWithSuccess)(id responseObject);
 typedef void(^CompletionBlockWithFailure)(NSError *error);
 
 @interface VASNetworkManager : NSObject
 
-+ (instancetype)sharedInstance;
-
-- (void)requestUserInfoWithSuccess:(UserInfoCompletionBlockWithSuccess)success
+- (void)requestUserInfoWithSuccess:(CompletionBlockWithSuccess)success
                            failure:(CompletionBlockWithFailure)failure;
 - (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
                                       failure:(CompletionBlockWithFailure)failure;
