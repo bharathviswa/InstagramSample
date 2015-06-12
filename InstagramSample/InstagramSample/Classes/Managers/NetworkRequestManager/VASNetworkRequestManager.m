@@ -24,8 +24,7 @@
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
           baseRequestParameters:(NSDictionary *)parameters
 {
-    if (self = [super init])
-    {
+    if (self = [super init]) {
         _operationManager = [[VASOperationManager alloc] initWithBaseURL:baseURL
                                                         configurationAPI:parameters];
     }

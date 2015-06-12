@@ -54,13 +54,6 @@
             
         }
     }];
-    
-    [self.resourceManager requestRecentUserMediaListWithSuccess:^(NSArray *data) {
-        
-        NSLog(@"%@", data);
-    } failure:^(NSError *error) {
-        
-    }];
 }
 
 - (RACCommand *)updatePage

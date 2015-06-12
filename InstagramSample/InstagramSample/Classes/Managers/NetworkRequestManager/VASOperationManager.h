@@ -13,8 +13,13 @@ typedef void(^OperationManagerCompletionBlockWithFailure)(AFHTTPRequestOperation
 
 @interface VASOperationManager : AFHTTPRequestOperationManager
 
+#pragma mark - Initialize
+
 - (instancetype)initWithBaseURL:(NSURL *)url
-                configurationAPI:(id)configuration;
+               configurationAPI:(id)configuration;
+
+#pragma mark - Operations
+#pragma mark GET
 
 - (AFHTTPRequestOperation *)operationWithGET:(NSString *)method
                                   parameters:(id)parameters

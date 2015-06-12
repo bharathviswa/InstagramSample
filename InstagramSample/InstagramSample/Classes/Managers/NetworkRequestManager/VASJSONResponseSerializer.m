@@ -19,8 +19,7 @@
 
 - (instancetype)initWithResultClass:(Class)resultClass
 {
-    if (self = [super init])
-    {
+    if (self = [super init]) {
         self.resultClass = resultClass;
         self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
     }

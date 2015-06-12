@@ -18,6 +18,8 @@
 
 @implementation VASOperationManager
 
+#pragma mark - Initialize
+
 - (instancetype)initWithBaseURL:(NSURL *)url
                configurationAPI:(id)configuration
 {
@@ -27,35 +29,46 @@
     return self;
 }
 
+#pragma mark - Operations
+
 - (AFHTTPRequestOperation *)operationWithGET:(NSString *)method
                                   parameters:(id)parameters
                                  resultClass:(Class)resultClass
                                      success:(OperationManagerCompletionBlockWithSuccess)success
                                      failure:(OperationManagerCompletionBlockWithFailure)failure
 {
-    [self.parameters addEntriesFromDictionary:parameters];
-    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
-                                                                             URLString:[[NSURL URLWithString:method? : @"" relativeToURL:self.baseURL] absoluteString]
-                                                                            parameters:self.parameters
-                                                                                 error:NULL];
+    NSURLRequest *urlRequest = [self requestWithGET:method parameters:parameters];
     
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:urlRequest
-                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                                          if (responseObject) {
-                                                                              if (success)
-                                                                                  success(operation, responseObject);
-                                                                          }
-                                                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                                          if (error) {
-                                                                              if (failure)
-                                                                                  failure(operation, error);
-                                                                          }
-                                                                      }];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:urlRequest                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (responseObject) {
+            if (success)
+                success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (error) {
+            if (failure)
+                failure(operation, error);
+        }
+    }];
     
     VASJSONResponseSerializer *responseSerializer = [[VASJSONResponseSerializer alloc] initWithResultClass:resultClass];
     operation.responseSerializer = responseSerializer;
     
     return operation;
+}
+
+#pragma mark - Request's
+
+- (NSURLRequest *)requestWithGET:(NSString *)method parameters:(id)parameters
+{
+    [self.parameters addEntriesFromDictionary:parameters];
+    NSString *urlString = [[NSURL URLWithString:method? : [NSString string] relativeToURL:self.baseURL] absoluteString];
+    
+    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                             URLString:urlString
+                                                                            parameters:self.parameters
+                                                                                 error:NULL];
+    return urlRequest;
 }
 
 @end
