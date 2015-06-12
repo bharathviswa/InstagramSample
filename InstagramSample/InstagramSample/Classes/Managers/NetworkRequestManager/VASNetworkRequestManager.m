@@ -9,13 +9,11 @@
 #import "VASNetworkRequestManager.h"
 
 #import "AFNetworking.h"
-#import "VASJSONResponseSerializer.h"
+#import "VASOperationManager.h"
 
 @interface VASNetworkRequestManager()
 
-@property (nonatomic, strong) NSURL *baseURL;
-@property (nonatomic, strong) NSMutableDictionary *baseRequestParameters;
-@property (nonatomic, strong) NSURLSessionConfiguration *sessionConfig;
+@property (nonatomic, strong) VASOperationManager *operationManager;
 
 @end
 
@@ -26,45 +24,39 @@
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
           baseRequestParameters:(NSDictionary *)parameters
 {
-    if (self = [super init]) {
-        _baseURL = baseURL;
-        _baseRequestParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
-        
-        _sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    if (self = [super init])
+    {
+        _operationManager = [[VASOperationManager alloc] initWithBaseURL:baseURL
+                                                        configurationAPI:parameters];
     }
     return self;
 }
 
 #pragma mark - Request's
 
-- (void)sendGetRequestWithMethod:(NSString *)method
-                      parameters:(NSDictionary *)parameters
-                     resultClass:(Class)resultClass
-                         success:(NetworkRequestCompletionBlockWithSuccess)success
-                         failure:(NetworkRequestCompletionBlockWithFailure)failure
+- (AFHTTPRequestOperation *)sendGetRequestWithMethod:(NSString *)method
+                                          parameters:(NSDictionary *)parameters
+                                         resultClass:(Class)resultClass
+                                             success:(NetworkRequestCompletionBlockWithSuccess)success
+                                             failure:(NetworkRequestCompletionBlockWithFailure)failure
 {
-    AFURLSessionManager *sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:self.sessionConfig];
-    VASJSONResponseSerializer *responseSerializer = [[VASJSONResponseSerializer alloc] initWithResultClass:resultClass];
-    sessionManager.responseSerializer = responseSerializer;
+    AFHTTPRequestOperation *operation = [self.operationManager operationWithGET:method
+                                                                     parameters:parameters
+                                                                    resultClass:resultClass
+                                                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                            if (responseObject) {
+                                                                                if (success)
+                                                                                    success(responseObject);
+                                                                            }
+                                                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                            if (error) {
+                                                                                if (failure)
+                                                                                    failure(error);
+                                                                            }
+                                                                        }];
+    [operation start];
     
-    [self.baseRequestParameters addEntriesFromDictionary:parameters];
-    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
-                                                                             URLString:[[NSURL URLWithString:method? : @"" relativeToURL:self.baseURL] absoluteString]
-                                                                            parameters:self.baseRequestParameters
-                                                                                 error:NULL];
-    NSURLSessionDataTask *dataTask = [sessionManager dataTaskWithRequest:urlRequest
-                                                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                                           if (responseObject) {
-                                                               if (success)
-                                                                   success(responseObject);
-                                                           }
-                                                           if (error) {
-                                                               
-                                                               if (failure)
-                                                                   failure(error);
-                                                           }
-                                                       }];
-    [dataTask resume];
+    return operation;
 }
 
 @end

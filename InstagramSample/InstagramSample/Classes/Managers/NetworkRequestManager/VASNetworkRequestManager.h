@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class AFHTTPRequestOperation;
+
 typedef void(^NetworkRequestCompletionBlockWithSuccess)(id responseObject);
 typedef void(^NetworkRequestCompletionBlockWithFailure)(NSError *error);
 
@@ -20,10 +22,10 @@ typedef void(^NetworkRequestCompletionBlockWithFailure)(NSError *error);
 
 #pragma mark - Request's
 
-- (void)sendGetRequestWithMethod:(NSString *)method
-                      parameters:(NSDictionary *)parameters
-                     resultClass:(Class)resultClass
-                         success:(NetworkRequestCompletionBlockWithSuccess)success
-                         failure:(NetworkRequestCompletionBlockWithFailure)failure;
+- (AFHTTPRequestOperation *)sendGetRequestWithMethod:(NSString *)method
+                                          parameters:(NSDictionary *)parameters
+                                         resultClass:(Class)resultClass
+                                             success:(NetworkRequestCompletionBlockWithSuccess)success
+                                             failure:(NetworkRequestCompletionBlockWithFailure)failure;
 
 @end
