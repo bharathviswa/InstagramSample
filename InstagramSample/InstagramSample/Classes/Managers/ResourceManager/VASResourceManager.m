@@ -38,35 +38,59 @@ static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 - (void)requestUserInfoWithSuccess:(CompletionBlockWithSuccess)success
                            failure:(CompletionBlockWithFailure)failure
 {
-    [self.manager sendGetRequestWithMethod:nil
-                                parameters:nil
-                               resultClass:[VASUser class]
-                                   success:^(id responseObject) {
-                                       if (responseObject) {
-                                           if (success)
-                                               success(responseObject);
-                                       }
-                                   }
-                                   failure:^(NSError *error) {
-                                       
-                                   }];
+    [self.manager resumeTaskWithGetRequestWithMethod:nil
+                                          parameters:nil
+                                         resultClass:[VASUser class]
+                                             success:^(id responseObject) {
+                                                 if (responseObject) {
+                                                     success(responseObject);
+                                                 }
+                                             } failure:^(NSError *error) {
+                                                 if (error) {
+                                                     failure(error);
+                                                 }
+                                             }];
+//    [self.manager sendGetRequestWithMethod:nil
+//                                parameters:nil
+//                               resultClass:[VASUser class]
+//                                   success:^(id responseObject) {
+//                                       if (responseObject) {
+//                                           if (success)
+//                                               success(responseObject);
+//                                       }
+//                                   }
+//                                   failure:^(NSError *error) {
+//                                       
+//                                   }];
 }
 
 - (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
                                       failure:(CompletionBlockWithFailure)failure
 {
-    [self.manager sendGetRequestWithMethod:kUserRecentMediaAPIMethod
-                                parameters:nil
-                               resultClass:[VASMedia class]
-                                   success:^(id responseObject) {
-                                       if (responseObject) {
-                                           if (success)
-                                               success(responseObject);
-                                       }
-                                   }
-                                   failure:^(NSError *error) {
-                                       
-                                   }];
+    [self.manager resumeTaskWithGetRequestWithMethod:kUserRecentMediaAPIMethod
+                                          parameters:nil
+                                         resultClass:[VASMedia class]
+                                             success:^(id responseObject) {
+                                                 if (responseObject) {
+                                                     success(responseObject);
+                                                 }
+                                             } failure:^(NSError *error) {
+                                                 if (error) {
+                                                     failure(error);
+                                                 }
+                                             }];
+//    [self.manager sendGetRequestWithMethod:kUserRecentMediaAPIMethod
+//                                parameters:nil
+//                               resultClass:[VASMedia class]
+//                                   success:^(id responseObject) {
+//                                       if (responseObject) {
+//                                           if (success)
+//                                               success(responseObject);
+//                                       }
+//                                   }
+//                                   failure:^(NSError *error) {
+//                                       
+//                                   }];
 }
 
 @end

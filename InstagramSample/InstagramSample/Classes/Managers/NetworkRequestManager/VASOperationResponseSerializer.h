@@ -8,7 +8,7 @@
 
 #import "AFURLResponseSerialization.h"
 
-@interface VASJSONResponseSerializer : AFJSONResponseSerializer
+@interface VASOperationResponseSerializer : AFJSONResponseSerializer
 
 - (instancetype)initWithResultClass:(Class)resultClass;
 

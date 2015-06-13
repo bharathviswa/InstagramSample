@@ -8,7 +8,7 @@
 
 #import "VASOperationManager.h"
 
-#import "VASJSONResponseSerializer.h"
+#import "VASOperationResponseSerializer.h"
 
 @interface VASOperationManager()
 
@@ -39,19 +39,20 @@
 {
     NSURLRequest *urlRequest = [self requestWithGET:method parameters:parameters];
     
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:urlRequest                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (responseObject) {
-            if (success)
-                success(operation, responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (error) {
-            if (failure)
-                failure(operation, error);
-        }
-    }];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:urlRequest
+                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                          if (responseObject) {
+                                                                              if (success)
+                                                                                  success(operation, responseObject);
+                                                                          }
+                                                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          if (error) {
+                                                                              if (failure)
+                                                                                  failure(operation, error);
+                                                                          }
+                                                                      }];
     
-    VASJSONResponseSerializer *responseSerializer = [[VASJSONResponseSerializer alloc] initWithResultClass:resultClass];
+    VASOperationResponseSerializer *responseSerializer = [[VASOperationResponseSerializer alloc] initWithResultClass:resultClass];
     operation.responseSerializer = responseSerializer;
     
     return operation;

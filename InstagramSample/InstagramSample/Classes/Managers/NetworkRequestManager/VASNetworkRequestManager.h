@@ -22,8 +22,14 @@ typedef void(^NetworkRequestCompletionBlockWithFailure)(NSError *error);
 
 #pragma mark - Request's
 
+- (NSURLSessionDataTask *)resumeTaskWithGetRequestWithMethod:(NSString *)method
+                                                  parameters:(id)parameters
+                                                 resultClass:(Class)resultClass
+                                                     success:(NetworkRequestCompletionBlockWithSuccess)success
+                                                     failure:(NetworkRequestCompletionBlockWithFailure)failure;
+
 - (AFHTTPRequestOperation *)sendGetRequestWithMethod:(NSString *)method
-                                          parameters:(NSDictionary *)parameters
+                                          parameters:(id)parameters
                                          resultClass:(Class)resultClass
                                              success:(NetworkRequestCompletionBlockWithSuccess)success
                                              failure:(NetworkRequestCompletionBlockWithFailure)failure;

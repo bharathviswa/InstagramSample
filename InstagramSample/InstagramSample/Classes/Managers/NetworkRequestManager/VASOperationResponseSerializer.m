@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 Igor Vasilenko. All rights reserved.
 //
 
-#import "VASJSONResponseSerializer.h"
+#import "VASOperationResponseSerializer.h"
 
-@interface VASJSONResponseSerializer()
+@interface VASOperationResponseSerializer()
 
 @property (nonatomic, strong) Class resultClass;
 @property (nonatomic, strong) id resultResponseObject;
 
 @end
 
-@implementation VASJSONResponseSerializer
+@implementation VASOperationResponseSerializer
 
 - (instancetype)initWithResultClass:(Class)resultClass
 {
