@@ -15,7 +15,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.dispath_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        self.dispatch_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
     return self;
 }
@@ -41,7 +41,7 @@
            forKey:(NSString *)key
        completion:(void(^)(id model, NSError *error))completion
 {
-    dispatch_async(self.dispath_queue, ^{
+    dispatch_async(self.dispatch_queue, ^{
         NSError *error;
         id model = [self parseJSON:JSON forKey:key resultClass:resultClass error:error];
         

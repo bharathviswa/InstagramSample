@@ -10,6 +10,6 @@
 
 @interface VASOperationResponseSerializer : AFJSONResponseSerializer
 
-- (instancetype)initWithResultClass:(Class)resultClass;
+- (instancetype)initWithResultClass:(Class)resultClass forKey:(NSString *)key;
 
 @end

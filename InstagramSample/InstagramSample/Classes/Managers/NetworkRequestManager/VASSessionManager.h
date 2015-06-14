@@ -10,15 +10,15 @@
 
 @class VASSessionResponseSerializer;
 
-typedef void(^VASURLSessionManagerCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
-typedef void(^VASURLSessionManagerCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
+typedef void(^SessionManagerCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
+typedef void(^SessionManagerCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
 
-typedef NS_ENUM(NSUInteger, VASRequestMethod) {
-    VASRequestMethodGET,
-    VASRequestMethodPOST,
-    VASRequestMethodPUT,
-    VASRequestMethodPATCH,
-    VASRequestMethodDELETE
+typedef NS_ENUM(NSUInteger, VASHTTPMethod) {
+    VASHTTPMethodGET,
+    VASHTTPMethodPOST,
+    VASHTTPMethodPUT,
+    VASHTTPMethodPATCH,
+    VASHTTPMethodDELETE
 };
 
 @interface VASSessionManager : AFURLSessionManager
@@ -29,18 +29,18 @@ typedef NS_ENUM(NSUInteger, VASRequestMethod) {
                                      baseURL:(NSURL *)baseURL
                               baseParameters:(id)parameters;
 
-- (NSURLSessionDataTask *)method:(VASRequestMethod)method
+- (NSURLSessionDataTask *)method:(VASHTTPMethod)method
                        URLString:(NSString *)URLString
                       parameters:(id)parameters
-                         success:(VASURLSessionManagerCompletionBlockWithSuccess)success
-                         failure:(VASURLSessionManagerCompletionBlockWithFailure)failure;
+                         success:(SessionManagerCompletionBlockWithSuccess)success
+                         failure:(SessionManagerCompletionBlockWithFailure)failure;
 
-- (NSURLSessionDataTask *)method:(VASRequestMethod)method
+- (NSURLSessionDataTask *)method:(VASHTTPMethod)method
                        URLString:(NSString *)URLString
                       parameters:(id)parameters
                      resultClass:(Class)resultClass
                           forKey:(NSString *)key
-                         success:(VASURLSessionManagerCompletionBlockWithSuccess)success
-                         failure:(VASURLSessionManagerCompletionBlockWithFailure)failure;
+                         success:(SessionManagerCompletionBlockWithSuccess)success
+                         failure:(SessionManagerCompletionBlockWithFailure)failure;
 
 @end

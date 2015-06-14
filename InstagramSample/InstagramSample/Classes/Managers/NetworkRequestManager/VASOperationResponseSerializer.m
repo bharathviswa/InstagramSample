@@ -12,14 +12,16 @@
 
 @property (nonatomic, strong) Class resultClass;
 @property (nonatomic, strong) id resultResponseObject;
+@property (nonatomic, strong) NSString *keyPath;
 
 @end
 
 @implementation VASOperationResponseSerializer
 
-- (instancetype)initWithResultClass:(Class)resultClass
+- (instancetype)initWithResultClass:(Class)resultClass forKey:(NSString *)key
 {
     if (self = [super init]) {
+        self.keyPath = key;
         self.resultClass = resultClass;
         self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
     }
@@ -32,16 +34,16 @@
     
     if (self.resultClass)
     {
-        if ([responseObject[@"data"] isKindOfClass:[NSArray class]])
+        if ([responseObject[self.keyPath] isKindOfClass:[NSArray class]])
         {
             self.resultResponseObject = [MTLJSONAdapter modelsOfClass:self.resultClass
-                                                        fromJSONArray:responseObject[@"data"]
+                                                        fromJSONArray:responseObject[self.keyPath]
                                                                 error:NULL];
         }
-        else if ([responseObject[@"data"] isKindOfClass:[NSDictionary class]])
+        else if ([responseObject[self.keyPath] isKindOfClass:[NSDictionary class]])
         {
             self.resultResponseObject = [MTLJSONAdapter modelOfClass:self.resultClass
-                                                  fromJSONDictionary:responseObject[@"data"]
+                                                  fromJSONDictionary:responseObject[self.keyPath]
                                                                error:NULL];
         }
     }

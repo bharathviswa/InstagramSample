@@ -13,7 +13,7 @@ typedef void(^VASSessionResponseSerializerWithError)(NSURLSessionDataTask *task,
 
 @interface VASSessionResponseSerializer : AFJSONResponseSerializer
 
-@property (nonatomic, strong) dispatch_queue_t dispath_queue;
+@property (nonatomic, strong) dispatch_queue_t dispatch_queue;
 
 - (void)parseJSON:(id)JSON
            forKey:(NSString *)key

@@ -36,6 +36,9 @@
 
 - (void)bindUI
 {
+    self.userPictureImageView.layer.masksToBounds = YES;
+    self.userPictureImageView.layer.cornerRadius = self.userPictureImageView.frame.size.width/2;
+    
     RAC(self.userPictureImageView, image) = RACObserve(self.viewModel, userPictureImage);
     RAC(self.fullNameLabel, text) = RACObserve(self.viewModel, fullNameLabelString);
     RAC(self.bioLabel, text) = RACObserve(self.viewModel, bioLabelString);

@@ -34,19 +34,32 @@
 
 #pragma mark - Requests data tasks
 
-- (NSURLSessionDataTask *)method:(VASRequestMethod)method
+- (NSURLSessionDataTask *)method:(VASHTTPMethod)method
                        URLString:(NSString *)URLString
                       parameters:(id)parameters
-                         success:(VASURLSessionManagerCompletionBlockWithSuccess)success
-                         failure:(VASURLSessionManagerCompletionBlockWithFailure)failure
+                         success:(SessionManagerCompletionBlockWithSuccess)success
+                         failure:(SessionManagerCompletionBlockWithFailure)failure
 {
     switch (method) {
-        case VASRequestMethodGET:
+        case VASHTTPMethodGET:
             return [self GET:URLString
                   parameters:parameters
                      success:success
                      failure:failure];
             break;
+        case VASHTTPMethodPOST:
+            return nil;
+            break;
+        case VASHTTPMethodPUT:
+            return nil;
+            break;
+        case VASHTTPMethodPATCH:
+            return nil;
+            break;
+        case VASHTTPMethodDELETE:
+            return nil;
+            break;
+
         default:
             return [self GET:URLString
                   parameters:parameters
@@ -55,15 +68,16 @@
     }
 }
 
-- (NSURLSessionDataTask *)method:(VASRequestMethod)method
+- (NSURLSessionDataTask *)method:(VASHTTPMethod)method
                        URLString:(NSString *)URLString
                       parameters:(id)parameters
                      resultClass:(Class)resultClass
                           forKey:(NSString *)key
-                         success:(VASURLSessionManagerCompletionBlockWithSuccess)success
-                         failure:(VASURLSessionManagerCompletionBlockWithFailure)failure
+                         success:(SessionManagerCompletionBlockWithSuccess)success
+                         failure:(SessionManagerCompletionBlockWithFailure)failure
 {
     __weak __typeof(self)weakSelf = self;
+    
     return [self method:method
               URLString:URLString
              parameters:parameters
@@ -79,11 +93,12 @@
 }
 
 #pragma mark - HTTP Methods Data Tasks
+#pragma mark GET
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
                    parameters:(id)parameters
-                      success:(VASURLSessionManagerCompletionBlockWithSuccess)success
-                      failure:(VASURLSessionManagerCompletionBlockWithFailure)failure
+                      success:(SessionManagerCompletionBlockWithSuccess)success
+                      failure:(SessionManagerCompletionBlockWithFailure)failure
 {
     [self.parameters addEntriesFromDictionary:parameters];
     NSString *urlString = [[NSURL URLWithString:URLString? : [NSString string] relativeToURL:self.baseURL] absoluteString];

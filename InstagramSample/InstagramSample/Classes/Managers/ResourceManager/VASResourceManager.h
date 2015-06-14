@@ -13,9 +13,11 @@ typedef void(^CompletionBlockWithFailure)(NSError *error);
 
 @interface VASResourceManager : NSObject
 
-- (void)requestUserInfoWithSuccess:(CompletionBlockWithSuccess)success
-                           failure:(CompletionBlockWithFailure)failure;
-- (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
-                                      failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
+                                        success:(CompletionBlockWithSuccess)success
+                                        failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)requestRecentUserMediaListWithID:(NSString *)userID
+                                                   success:(CompletionBlockWithSuccess)success
+                                                   failure:(CompletionBlockWithFailure)failure;
 
 @end

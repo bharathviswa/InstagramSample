@@ -8,6 +8,14 @@
 
 #import "AFHTTPRequestOperationManager.h"
 
+typedef NS_ENUM(NSUInteger, VASHTTPMethod) {
+    VASHTTPMethodGET,
+    VASHTTPMethodPOST,
+    VASHTTPMethodPUT,
+    VASHTTPMethodPATH,
+    VASHTTPMethodDELETE
+};
+
 typedef void(^OperationManagerCompletionBlockWithSuccess)(AFHTTPRequestOperation *operation, id responseObject);
 typedef void(^OperationManagerCompletionBlockWithFailure)(AFHTTPRequestOperation *operation, NSError *error);
 
@@ -19,12 +27,19 @@ typedef void(^OperationManagerCompletionBlockWithFailure)(AFHTTPRequestOperation
                configurationAPI:(id)configuration;
 
 #pragma mark - Operations
-#pragma mark GET
 
-- (AFHTTPRequestOperation *)operationWithGET:(NSString *)method
-                                  parameters:(id)parameters
-                                 resultClass:(Class)resultClass
-                                     success:(OperationManagerCompletionBlockWithSuccess)success
-                                     failure:(OperationManagerCompletionBlockWithFailure)failure;
+- (AFHTTPRequestOperation *)method:(VASHTTPMethod)method
+                         URLString:(NSString *)URLString
+                        parameters:(id)parameters
+                           success:(OperationManagerCompletionBlockWithSuccess)success
+                           failure:(OperationManagerCompletionBlockWithFailure)failure;
+
+- (AFHTTPRequestOperation *)method:(VASHTTPMethod)method
+                         URLString:(NSString *)URLString
+                        parameters:(id)parameters
+                       resultClass:(Class)resultClass
+                            forKey:(NSString *)key
+                           success:(OperationManagerCompletionBlockWithSuccess)success
+                           failure:(OperationManagerCompletionBlockWithFailure)failure;
 
 @end

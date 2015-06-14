@@ -9,15 +9,16 @@
 #import "VASResourceManager.h"
 
 #import "AFNetworking.h"
-#import "VASNetworkRequestManager.h"
+#import "VASSessionManager.h"
 #import "VASUser.h"
 #import "VASMedia.h"
 
-static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
+static NSString *const kUserInfoAPIUrl = @"users/%@/";
+static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 
 @interface VASResourceManager()
 
-@property (nonatomic, strong) VASNetworkRequestManager *manager;
+@property (nonatomic, strong) VASSessionManager *manager;
 
 @end
 
@@ -27,70 +28,58 @@ static NSString *const kUserRecentMediaAPIMethod = @"media/recent";
 {
     if (self = [super init])
     {
-        _manager = [[VASNetworkRequestManager alloc] initWithBaseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]
-                                               baseRequestParameters:@{
-                                                                       @"client_id" : kInstagramAPIClientID
-                                                                       }];
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _manager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfiguration
+                                                                   baseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]
+                                                            baseParameters:@{@"client_id" : kInstagramAPIClientID}];
     }
     return self;
 }
 
-- (void)requestUserInfoWithSuccess:(CompletionBlockWithSuccess)success
-                           failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
+                                        success:(CompletionBlockWithSuccess)success
+                                        failure:(CompletionBlockWithFailure)failure
 {
-    [self.manager resumeTaskWithGetRequestWithMethod:nil
-                                          parameters:nil
-                                         resultClass:[VASUser class]
-                                             success:^(id responseObject) {
-                                                 if (responseObject) {
-                                                     success(responseObject);
-                                                 }
-                                             } failure:^(NSError *error) {
-                                                 if (error) {
-                                                     failure(error);
-                                                 }
-                                             }];
-//    [self.manager sendGetRequestWithMethod:nil
-//                                parameters:nil
-//                               resultClass:[VASUser class]
-//                                   success:^(id responseObject) {
-//                                       if (responseObject) {
-//                                           if (success)
-//                                               success(responseObject);
-//                                       }
-//                                   }
-//                                   failure:^(NSError *error) {
-//                                       
-//                                   }];
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:[NSString stringWithFormat:kUserInfoAPIUrl, userID]
+                                           parameters:nil
+                                          resultClass:[VASUser class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
 }
 
-- (void)requestRecentUserMediaListWithSuccess:(CompletionBlockWithSuccess)success
-                                      failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)requestRecentUserMediaListWithID:(NSString *)userID
+                                                   success:(CompletionBlockWithSuccess)success
+                                                   failure:(CompletionBlockWithFailure)failure
 {
-    [self.manager resumeTaskWithGetRequestWithMethod:kUserRecentMediaAPIMethod
-                                          parameters:nil
-                                         resultClass:[VASMedia class]
-                                             success:^(id responseObject) {
-                                                 if (responseObject) {
-                                                     success(responseObject);
-                                                 }
-                                             } failure:^(NSError *error) {
-                                                 if (error) {
-                                                     failure(error);
-                                                 }
-                                             }];
-//    [self.manager sendGetRequestWithMethod:kUserRecentMediaAPIMethod
-//                                parameters:nil
-//                               resultClass:[VASMedia class]
-//                                   success:^(id responseObject) {
-//                                       if (responseObject) {
-//                                           if (success)
-//                                               success(responseObject);
-//                                       }
-//                                   }
-//                                   failure:^(NSError *error) {
-//                                       
-//                                   }];
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:[NSString stringWithFormat:kUserRecentMediaAPIMethod, userID]
+                                           parameters:nil
+                                          resultClass:[VASMedia class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
 }
 
 @end
