@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kInstagramAuthToken;
+extern NSString *const kInstagramAuthURL;
 extern NSString *const kInstagramMyUserID;
 extern NSString *const kInstagramAPIClientID;
 extern NSString *const kInstagramAPIClientSecret;

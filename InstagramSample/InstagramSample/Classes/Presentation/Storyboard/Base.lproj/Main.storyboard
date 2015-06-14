@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="s8s-2r-NWw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="P75-sE-V5A">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,7 +23,7 @@
         <!--Home Page Controller-->
         <scene sceneID="OC4-BE-HNH">
             <objects>
-                <viewController id="Pjn-BO-WSi" customClass="VASHomePageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homePage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pjn-BO-WSi" customClass="VASHomePageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L0w-6F-b8i"/>
                         <viewControllerLayoutGuide type="bottom" id="FRq-tf-VF3"/>
@@ -183,25 +182,119 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Cm-qX-jab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="-10"/>
+            <point key="canvasLocation" x="646" y="-10"/>
+        </scene>
+        <!--Start Page-->
+        <scene sceneID="z7N-BR-Bg1">
+            <objects>
+                <viewController id="eoF-bz-AdX" customClass="VASStartPageController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dVR-S4-ql8"/>
+                        <viewControllerLayoutGuide type="bottom" id="fCf-6v-8N9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="q57-iI-ERd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9L-0l-Nst">
+                                <rect key="frame" x="66" y="269" width="188" height="30"/>
+                                <state key="normal" title="Authenticate">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToAuthPage:" destination="eoF-bz-AdX" eventType="touchUpInside" id="Bu6-Pf-6IT"/>
+                                    <segue destination="6Rw-mg-fYY" kind="modal" id="eQf-kF-Co8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C9L-0l-Nst" firstAttribute="leading" secondItem="q57-iI-ERd" secondAttribute="leadingMargin" constant="50" id="Ly8-XW-Agc"/>
+                            <constraint firstItem="C9L-0l-Nst" firstAttribute="top" secondItem="dVR-S4-ql8" secondAttribute="bottom" constant="205" id="SQi-aC-08V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C9L-0l-Nst" secondAttribute="trailing" constant="50" id="Tmo-38-QX6"/>
+                            <constraint firstItem="fCf-6v-8N9" firstAttribute="top" secondItem="C9L-0l-Nst" secondAttribute="bottom" constant="269" id="mus-WM-KCb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Start Page" id="Ooz-1c-3CK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5KY-6Y-Qid" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-504" y="-10"/>
+        </scene>
+        <!--Authentication-->
+        <scene sceneID="2TI-Yq-mqR">
+            <objects>
+                <viewController id="8Iv-n0-f5n" customClass="VASAuthPageController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dsa-Vf-U5R"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sum-5v-zay"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B5t-bd-Cut">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZk-DL-RGT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HZk-DL-RGT" firstAttribute="top" secondItem="B5t-bd-Cut" secondAttribute="top" id="JcY-aM-baU"/>
+                            <constraint firstItem="HZk-DL-RGT" firstAttribute="leading" secondItem="B5t-bd-Cut" secondAttribute="leading" id="RfR-Nh-AVg"/>
+                            <constraint firstItem="Sum-5v-zay" firstAttribute="top" secondItem="HZk-DL-RGT" secondAttribute="bottom" id="b7w-BI-q47"/>
+                            <constraint firstAttribute="trailing" secondItem="HZk-DL-RGT" secondAttribute="trailing" id="rGX-3c-WOv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Authentication" id="gqv-wo-Ypv"/>
+                    <connections>
+                        <outlet property="webView" destination="HZk-DL-RGT" id="xEP-Y4-FaJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XA9-tU-yWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="281" y="-10"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Blj-M4-72N">
+        <scene sceneID="bwC-9D-ljT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s8s-2r-NWw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P75-sE-V5A" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hjT-Ia-da5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BaA-se-VUV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Pjn-BO-WSi" kind="relationship" relationship="rootViewController" id="jis-eo-cpv"/>
+                        <segue destination="eoF-bz-AdX" kind="relationship" relationship="rootViewController" id="cMe-LK-ua1"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="73O-5J-6jk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTU-yn-ysb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-393" y="-2"/>
+            <point key="canvasLocation" x="-898" y="-10"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QsS-Em-ZLe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Rw-mg-fYY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wh1-B1-aQX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Iv-n0-f5n" kind="relationship" relationship="rootViewController" id="Out-nW-AB2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Plj-ef-5V0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-109" y="-10"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

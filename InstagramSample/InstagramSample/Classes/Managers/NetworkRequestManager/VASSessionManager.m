@@ -48,7 +48,10 @@
                      failure:failure];
             break;
         case VASHTTPMethodPOST:
-            return nil;
+            return [self POST:URLString
+                   parameters:parameters
+                      success:success
+                      failure:failure];
             break;
         case VASHTTPMethodPUT:
             return nil;
@@ -104,6 +107,36 @@
     NSString *urlString = [[NSURL URLWithString:URLString? : [NSString string] relativeToURL:self.baseURL] absoluteString];
     
     NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                             URLString:urlString
+                                                                            parameters:self.parameters
+                                                                                 error:NULL];
+    __block NSURLSessionDataTask *dataTask = nil;
+    
+    dataTask = [self dataTaskWithRequest:urlRequest
+                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                           if (error)
+                           {
+                               failure(dataTask, error);
+                           }
+                           else
+                           {
+                               success(dataTask, responseObject);
+                           }
+                       }];
+    return dataTask;
+}
+
+#pragma mark - POST
+
+- (NSURLSessionDataTask *)POST:(NSString *)URLString
+                    parameters:(id)parameters
+                       success:(SessionManagerCompletionBlockWithSuccess)success
+                       failure:(SessionManagerCompletionBlockWithFailure)failure
+{
+    [self.parameters addEntriesFromDictionary:parameters];
+    NSString *urlString = [[NSURL URLWithString:URLString? : [NSString string] relativeToURL:self.baseURL] absoluteString];
+    
+    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
                                                                              URLString:urlString
                                                                             parameters:self.parameters
                                                                                  error:NULL];

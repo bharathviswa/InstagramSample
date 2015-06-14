@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		05124C276B2333C81FF7CFE8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBB1B318FE48B2CB3DC3DC3 /* libPods.a */; };
 		B708A5AD1B2DDEF500C1451C /* VASConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B708A5AC1B2DDEF500C1451C /* VASConstants.m */; };
+		B708A5B01B2E0BB700C1451C /* VASStartPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B708A5AF1B2E0BB700C1451C /* VASStartPageController.m */; };
+		B708A5B31B2E0BED00C1451C /* VASAuthPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B708A5B21B2E0BED00C1451C /* VASAuthPageController.m */; };
+		B708A5B71B2E18E900C1451C /* VASAuthProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B708A5B61B2E18E900C1451C /* VASAuthProvider.m */; };
+		B708A5BA1B2E1F2100C1451C /* VASAuthPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B708A5B91B2E1F2100C1451C /* VASAuthPageViewModel.m */; };
 		B71BCDB01B25FEF900EDD4E5 /* InstagramSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDAF1B25FEF900EDD4E5 /* InstagramSampleTests.m */; };
 		B71BCDD61B26043400EDD4E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B71BCDBC1B26043400EDD4E5 /* AppDelegate.m */; };
 		B71BCDD71B26043400EDD4E5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71BCDC71B26043400EDD4E5 /* LaunchScreen.xib */; };
@@ -43,6 +47,14 @@
 		3BBB1B318FE48B2CB3DC3DC3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E115B7E20069F4C9C66108C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B708A5AC1B2DDEF500C1451C /* VASConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VASConstants.m; sourceTree = "<group>"; };
+		B708A5AE1B2E0BB700C1451C /* VASStartPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASStartPageController.h; path = StartPageController/VASStartPageController.h; sourceTree = "<group>"; };
+		B708A5AF1B2E0BB700C1451C /* VASStartPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASStartPageController.m; path = StartPageController/VASStartPageController.m; sourceTree = "<group>"; };
+		B708A5B11B2E0BED00C1451C /* VASAuthPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASAuthPageController.h; path = AuthPage/VASAuthPageController.h; sourceTree = "<group>"; };
+		B708A5B21B2E0BED00C1451C /* VASAuthPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASAuthPageController.m; path = AuthPage/VASAuthPageController.m; sourceTree = "<group>"; };
+		B708A5B51B2E18E900C1451C /* VASAuthProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASAuthProvider.h; path = InstagramSample/Classes/Managers/AuthProvider/VASAuthProvider.h; sourceTree = SOURCE_ROOT; };
+		B708A5B61B2E18E900C1451C /* VASAuthProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASAuthProvider.m; path = InstagramSample/Classes/Managers/AuthProvider/VASAuthProvider.m; sourceTree = SOURCE_ROOT; };
+		B708A5B81B2E1F2100C1451C /* VASAuthPageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VASAuthPageViewModel.h; path = AuthPageViewModel/VASAuthPageViewModel.h; sourceTree = "<group>"; };
+		B708A5B91B2E1F2100C1451C /* VASAuthPageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VASAuthPageViewModel.m; path = AuthPageViewModel/VASAuthPageViewModel.m; sourceTree = "<group>"; };
 		B71BCD8D1B25FEF900EDD4E5 /* InstagramSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71BCDA91B25FEF900EDD4E5 /* InstagramSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71BCDAE1B25FEF900EDD4E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +116,15 @@
 				311816383B75F1BF700FA490 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B708A5B41B2E181900C1451C /* AuthProvider */ = {
+			isa = PBXGroup;
+			children = (
+				B708A5B51B2E18E900C1451C /* VASAuthProvider.h */,
+				B708A5B61B2E18E900C1451C /* VASAuthProvider.m */,
+			);
+			name = AuthProvider;
 			sourceTree = "<group>";
 		};
 		B71BCD841B25FEF900EDD4E5 = {
@@ -225,6 +246,8 @@
 			children = (
 				B76504251B26E4050031D4B4 /* VASHomePageViewModel.h */,
 				B76504261B26E4050031D4B4 /* VASHomePageViewModel.m */,
+				B708A5B81B2E1F2100C1451C /* VASAuthPageViewModel.h */,
+				B708A5B91B2E1F2100C1451C /* VASAuthPageViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -260,6 +283,10 @@
 			children = (
 				B76504221B26E3D00031D4B4 /* VASHomePageController.h */,
 				B76504231B26E3D00031D4B4 /* VASHomePageController.m */,
+				B708A5AE1B2E0BB700C1451C /* VASStartPageController.h */,
+				B708A5AF1B2E0BB700C1451C /* VASStartPageController.m */,
+				B708A5B11B2E0BED00C1451C /* VASAuthPageController.h */,
+				B708A5B21B2E0BED00C1451C /* VASAuthPageController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -340,6 +367,7 @@
 		B7D578F91B29BD1A00D4F541 /* NetworkFlow */ = {
 			isa = PBXGroup;
 			children = (
+				B708A5B41B2E181900C1451C /* AuthProvider */,
 				B720DCE81B2CF41300F46344 /* OperationManager */,
 				B720DCE41B2CE0CE00F46344 /* SessionManager */,
 				B7D579001B29C01B00D4F541 /* ResourceManager */,
@@ -504,14 +532,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71BCDDB1B26043400EDD4E5 /* main.m in Sources */,
+				B708A5B31B2E0BED00C1451C /* VASAuthPageController.m in Sources */,
 				B708A5AD1B2DDEF500C1451C /* VASConstants.m in Sources */,
+				B708A5B71B2E18E900C1451C /* VASAuthProvider.m in Sources */,
 				B759545D1B26468F00E4731A /* VASUser.m in Sources */,
 				B7D578FE1B29BD1A00D4F541 /* VASOperationResponseSerializer.m in Sources */,
 				B76504271B26E4050031D4B4 /* VASHomePageViewModel.m in Sources */,
 				B7D579031B29C01B00D4F541 /* VASResourceManager.m in Sources */,
 				B720DCE71B2CE16200F46344 /* VASSessionResponseSerializer.m in Sources */,
 				B76CC0291B2B0D9A0065C877 /* VASOperationManager.m in Sources */,
+				B708A5B01B2E0BB700C1451C /* VASStartPageController.m in Sources */,
 				B720DCE31B2CD88000F46344 /* VASSessionManager.m in Sources */,
+				B708A5BA1B2E1F2100C1451C /* VASAuthPageViewModel.m in Sources */,
 				B765043B1B2741C60031D4B4 /* VASMedia.m in Sources */,
 				B76504411B274C9F0031D4B4 /* VASComment.m in Sources */,
 				B76504241B26E3D00031D4B4 /* VASHomePageController.m in Sources */,

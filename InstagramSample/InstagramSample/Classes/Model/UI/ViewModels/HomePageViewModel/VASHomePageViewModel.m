@@ -55,8 +55,8 @@
                                         }];
     
     [self.resourceManager requestRecentUserMediaListWithID:kInstagramMyUserID
-                                                   success:^(id responseObject) {
-                                                       NSLog(@"%@",responseObject);
+                                                   success:^(NSArray *mediaList) {
+                                                       NSLog(@"%@", mediaList);
                                                    } failure:^(NSError *error) {
                                                        
                                                    }];
