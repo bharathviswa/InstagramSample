@@ -12,8 +12,6 @@
 
 @interface VASAuthProvider()
 
-@property (nonatomic, strong) NSURL *baseURL;
-@property (nonatomic, strong) NSMutableDictionary *parameters;
 @property (nonatomic, strong) VASSessionManager *sessionManager;
 
 @end
@@ -25,18 +23,18 @@
                    clientSecret:(NSString *)clientSecret
 {
     if (self = [super init]) {
-        _baseURL = baseURL;
-        _parameters = [@{
-                         @"client_id" : clientID,
-                         @"client_secret" : clientSecret,
-                         @"grant_type" : @"authorization_code",
-                         @"redirect_uri" : kInstagramAPIRedirectUrl
-                         } mutableCopy];
+        
+        NSDictionary *parameters = [@{
+                                      @"client_id" : clientID,
+                                      @"client_secret" : clientSecret,
+                                      @"grant_type" : @"authorization_code",
+                                      @"redirect_uri" : kInstagramAPIRedirectUrl
+                                      } mutableCopy];
         
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
         _sessionManager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfig
-                                                                          baseURL:_baseURL
-                                                                   baseParameters:_parameters];
+                                                                          baseURL:baseURL
+                                                                   baseParameters:parameters];
     }
     return self;
 }

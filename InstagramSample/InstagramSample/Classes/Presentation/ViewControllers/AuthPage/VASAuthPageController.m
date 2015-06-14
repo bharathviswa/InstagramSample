@@ -9,6 +9,7 @@
 #import "VASAuthPageController.h"
 
 #import "VASAuthPageViewModel.h"
+#import "SSKeychain.h"
 
 @interface VASAuthPageController () <UIWebViewDelegate>
 
