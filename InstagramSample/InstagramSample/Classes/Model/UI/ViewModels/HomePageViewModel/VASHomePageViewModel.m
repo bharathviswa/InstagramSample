@@ -10,11 +10,11 @@
 
 #import "VASResourceManager.h"
 #import "VASUser.h"
+#import "SSKeychain.h"
 
 @interface VASHomePageViewModel()
 
 @property (nonatomic, strong) VASResourceManager *resourceManager;
-@property (nonatomic, strong) dispatch_queue_t dispatch_queue;
 
 @end
 
@@ -25,7 +25,6 @@
     self = [super init];
     if (self) {
         self.resourceManager = [[VASResourceManager alloc] init];
-        _dispatch_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         [self loadData];
     }
     return self;
@@ -54,12 +53,18 @@
                                             
                                         }];
     
-    [self.resourceManager requestRecentUserMediaListWithID:kInstagramMyUserID
-                                                   success:^(NSArray *mediaList) {
-                                                       NSLog(@"%@", mediaList);
-                                                   } failure:^(NSError *error) {
-                                                       
-                                                   }];
+//    [self.resourceManager requestRecentUserMediaListWithID:kInstagramMyUserID
+//                                                   success:^(NSArray *mediaList) {
+//                                                       NSLog(@"%@", mediaList);
+//                                                   } failure:^(NSError *error) {
+//                                                       
+//                                                   }];
+    
+    [self.resourceManager requestSelfMediaFeedListWithSuccess:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (RACCommand *)updatePage

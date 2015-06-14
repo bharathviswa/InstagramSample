@@ -13,9 +13,15 @@ typedef void(^AuthProviderCompletionBlockWithFailure)(NSURLSessionDataTask *task
 
 @interface VASAuthProvider : NSObject
 
+@property (nonatomic, strong) NSURLRequest *authUrlRequest;
+
+#pragma mark - Initialize
+
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
                        clientID:(NSString *)clientID
                    clientSecret:(NSString *)clientSecret;
+
+#pragma mark - Access Token Request
 
 - (void)requestAccessTokenWithResponseCode:(NSString *)responseCode
                                    success:(AuthProviderCompletionBlockWithSuccess)success

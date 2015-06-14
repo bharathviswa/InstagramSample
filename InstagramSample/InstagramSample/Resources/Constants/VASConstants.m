@@ -8,6 +8,9 @@
 
 #import "VASConstants.h"
 
+NSString *const kKeychainServiceName = @"com.IgorVasilenko.InstagramSample";
+NSString *const kKeychainAccountName = @"InstagramSample";
+
 NSString *const kInstagramAuthToken = @"https://api.instagram.com/oauth/access_token/";
 NSString *const kInstagramAuthURL = @"https://instagram.com/oauth/authorize/";
 NSString *const kInstagramMyUserID = @"419587016";

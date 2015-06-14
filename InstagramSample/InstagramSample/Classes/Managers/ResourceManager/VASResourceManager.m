@@ -9,12 +9,14 @@
 #import "VASResourceManager.h"
 
 #import "AFNetworking.h"
+#import "SSKeychain.h"
 #import "VASSessionManager.h"
 #import "VASUser.h"
 #import "VASMedia.h"
 
 static NSString *const kUserInfoAPIUrl = @"users/%@/";
 static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
+static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
 
 @interface VASResourceManager()
 
@@ -28,10 +30,13 @@ static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 {
     if (self = [super init])
     {
+        NSString *accessToken = [SSKeychain passwordForService:kKeychainServiceName
+                                                       account:kKeychainAccountName];
+        
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _manager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfiguration
                                                                    baseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]
-                                                            baseParameters:@{@"client_id" : kInstagramAPIClientID}];
+                                                            baseParameters:@{@"access_token" : accessToken}];
     }
     return self;
 }
@@ -65,6 +70,28 @@ static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:[NSString stringWithFormat:kUserRecentMediaAPIMethod, userID]
+                                           parameters:nil
+                                          resultClass:[VASMedia class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
+}
+
+- (NSURLSessionDataTask *)requestSelfMediaFeedListWithSuccess:(CompletionBlockWithSuccess)success
+                                                      failure:(CompletionBlockWithFailure)failure
+{
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:kUserSelfFeedAPIUrl
                                            parameters:nil
                                           resultClass:[VASMedia class]
                                                forKey:@"data"

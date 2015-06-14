@@ -203,7 +203,7 @@
                                 </state>
                                 <connections>
                                     <action selector="goToAuthPage:" destination="eoF-bz-AdX" eventType="touchUpInside" id="Bu6-Pf-6IT"/>
-                                    <segue destination="6Rw-mg-fYY" kind="modal" id="eQf-kF-Co8"/>
+                                    <segue destination="6Rw-mg-fYY" kind="modal" id="I8b-aX-b1r"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -224,7 +224,7 @@
         <!--Authentication-->
         <scene sceneID="2TI-Yq-mqR">
             <objects>
-                <viewController id="8Iv-n0-f5n" customClass="VASAuthPageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="authPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Iv-n0-f5n" customClass="VASAuthPageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dsa-Vf-U5R"/>
                         <viewControllerLayoutGuide type="bottom" id="Sum-5v-zay"/>

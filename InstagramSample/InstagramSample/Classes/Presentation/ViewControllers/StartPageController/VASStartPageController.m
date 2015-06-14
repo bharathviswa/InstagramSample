@@ -8,6 +8,8 @@
 
 #import "VASStartPageController.h"
 
+#import "SSKeychain.h"
+
 @interface VASStartPageController ()
 
 @end
@@ -21,7 +23,23 @@
 
 - (IBAction)goToAuthPage:(id)sender
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
+    NSString *password = [SSKeychain passwordForService:kKeychainServiceName
+                                                account:kKeychainAccountName];
+    
+    if (password)
+    {
+        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"homePage"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [self presentViewController:navController animated:YES completion:nil];
+    }
+    else
+    {
+        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"authPage"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [self presentViewController:navController animated:YES completion:nil];
+    }
 }
 
 @end

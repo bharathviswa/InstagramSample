@@ -18,6 +18,8 @@
 
 @implementation VASAuthProvider
 
+#pragma mark - Initialize
+
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
                        clientID:(NSString *)clientID
                    clientSecret:(NSString *)clientSecret
@@ -38,6 +40,26 @@
     }
     return self;
 }
+
+#pragma mark - Properties
+
+- (NSURLRequest *)authUrlRequest
+{
+
+    NSString *fullAuthUrlString = [[NSString alloc]
+                                   initWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=code",
+                                   kInstagramAuthURL,
+                                   kInstagramAPIClientID,
+                                   kInstagramAPIRedirectUrl
+                                   ];
+    
+    NSURL *authUrl = [NSURL URLWithString:fullAuthUrlString];
+    NSURLRequest *authUrlRequest = [[NSURLRequest alloc] initWithURL:authUrl];
+    
+    return authUrlRequest;
+}
+
+#pragma mark - Access Token Request
 
 - (void)requestAccessTokenWithResponseCode:(NSString *)responseCode
                                    success:(AuthProviderCompletionBlockWithSuccess)success

@@ -16,8 +16,12 @@ typedef void(^CompletionBlockWithFailure)(NSError *error);
 - (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
                                         success:(CompletionBlockWithSuccess)success
                                         failure:(CompletionBlockWithFailure)failure;
+
 - (NSURLSessionDataTask *)requestRecentUserMediaListWithID:(NSString *)userID
                                                    success:(CompletionBlockWithSuccess)success
                                                    failure:(CompletionBlockWithFailure)failure;
+
+- (NSURLSessionDataTask *)requestSelfMediaFeedListWithSuccess:(CompletionBlockWithSuccess)success
+                                                      failure:(CompletionBlockWithFailure)failure;
 
 @end

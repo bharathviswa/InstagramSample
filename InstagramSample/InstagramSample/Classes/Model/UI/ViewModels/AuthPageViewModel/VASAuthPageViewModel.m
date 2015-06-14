@@ -9,6 +9,7 @@
 #import "VASAuthPageViewModel.h"
 
 #import "VASAuthProvider.h"
+#import "SSKeychain.h"
 
 @interface VASAuthPageViewModel()
 
@@ -31,16 +32,7 @@
 
 - (NSURLRequest *)authUrlRequest
 {
-    NSString *fullAuthUrlString = [[NSString alloc]
-                                   initWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=code",
-                                   kInstagramAuthURL,
-                                   kInstagramAPIClientID,
-                                   kInstagramAPIRedirectUrl
-                                   ];
-    NSURL *authUrl = [NSURL URLWithString:fullAuthUrlString];
-    NSURLRequest *authUrlRequest = [[NSURLRequest alloc] initWithURL:authUrl];
-    
-    return authUrlRequest;
+    return self.authProvider.authUrlRequest;
 }
 
 - (void)requestAccessTokenWithResponseCode:(NSString *)responseCode
@@ -50,6 +42,9 @@
     [self.authProvider requestAccessTokenWithResponseCode:responseCode
                                                   success:^(NSURLSessionDataTask *task, NSString *accessToken) {
                                                       if (accessToken) {
+                                                          [SSKeychain setPassword:accessToken
+                                                                       forService:kKeychainServiceName
+                                                                          account:kKeychainAccountName];
                                                           success(YES);
                                                       }
                                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {

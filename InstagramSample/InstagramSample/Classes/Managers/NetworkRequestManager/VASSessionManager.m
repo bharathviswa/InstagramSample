@@ -126,7 +126,7 @@
     return dataTask;
 }
 
-#pragma mark - POST
+#pragma mark POST
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                     parameters:(id)parameters

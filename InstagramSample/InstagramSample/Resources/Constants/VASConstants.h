@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - Keychain Store
+
+extern NSString *const kKeychainServiceName;
+extern NSString *const kKeychainAccountName;
+
+#pragma mark - Instagram API Settings
+
 extern NSString *const kInstagramAuthToken;
 extern NSString *const kInstagramAuthURL;
 extern NSString *const kInstagramMyUserID;
