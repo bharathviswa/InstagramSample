@@ -32,8 +32,11 @@
 
 - (void)loadData
 {
+    NSUserDefaults *UD = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [UD objectForKey:@"userID"];
+    
     @weakify(self);
-    [self.resourceManager requestUserInfoWithID:kInstagramMyUserID
+    [self.resourceManager requestUserInfoWithID:userID
                                         success:^(VASUser *user) {
                                             @strongify(self);
                                             if (user) {
@@ -51,25 +54,26 @@
 
                                         } failure:^(NSError *error) {
                                             
-                                        }];
+                                    }];
     
-    [self.resourceManager requestSelfMediaFeedListWithSuccess:^(id responseObject) {
-        NSLog(@"%@", responseObject);
-    } failure:^(NSError *error) {
-        
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.resourceManager requestPopularMediaListWithSuccess:^(NSArray *media) {
+            NSLog(@"%d", media.count);
+        } failure:^(NSError *error) {
+            
+        }];
+    });
 }
 
 - (void)logoutFromAccount
 {
+    [SSKeychain deletePasswordForService:kKeychainServiceName account:kKeychainAccountName];
+    
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in [storage cookies]) {
         [storage deleteCookie:cookie];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [SSKeychain deletePasswordForService:kKeychainServiceName
-                                 account:kKeychainAccountName];
 }
 
 - (RACCommand *)updatePage

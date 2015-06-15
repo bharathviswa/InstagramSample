@@ -10,19 +10,26 @@
 
 @implementation VASAuthenticationConfigurator
 
+#pragma mark - Initialize
+
 + (instancetype)defaultConfigurator
 {
     return [[self alloc] init];
 }
 
-- (instancetype)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret
+- (instancetype)initWithClientID:(NSString *)clientID
+                    clientSecret:(NSString *)clientSecret
+                     redirectURL:(NSString *)redirectURL
 {
     if (self = [super init]) {
         _clientID = clientID;
         _clientSecret = clientSecret;
+        _redirectURL = redirectURL;
     }
     return self;
 }
+
+#pragma mark - Configuration properties
 
 - (NSString *)clientID
 {
@@ -57,7 +64,7 @@
              @"client_id" : self.clientID,
              @"client_secret" : self.clientSecret,
              @"grant_type" : self.grantType,
-             @"redirect_uri" : self.redirectUrl
+             @"redirect_uri" : self.redirectURL
              };
 }
 
@@ -65,33 +72,33 @@
 {
     return @{
              @"client_id" : self.clientID,
-             @"redirect_uri" : self.redirectUrl,
+             @"redirect_uri" : self.redirectURL,
              @"response_type" : @"code"
              };
 }
 
-- (NSString *)authorizeUrl
+- (NSString *)authenticateURL
 {
-    if (_authorizeUrl) {
-        return _authorizeUrl;
+    if (_authenticateURL) {
+        return _authenticateURL;
     }
     // default
     return @"https://instagram.com/oauth/authorize/";
 }
 
-- (NSString *)requestTokenUrl
+- (NSString *)requestTokenURL
 {
-    if (_requestTokenUrl) {
-        return _requestTokenUrl;
+    if (_requestTokenURL) {
+        return _requestTokenURL;
     }
     // default
     return @"https://api.instagram.com/oauth/access_token/";
 }
 
-- (NSString *)redirectUrl
+- (NSString *)redirectURL
 {
-    if (_redirectUrl) {
-        return _redirectUrl;
+    if (_redirectURL) {
+        return _redirectURL;
     }
     // default
     return @"http://spbvasilenko.github.com";

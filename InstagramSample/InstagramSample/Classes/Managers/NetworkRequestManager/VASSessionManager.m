@@ -117,7 +117,7 @@
                                                                            error:NULL];
             break;
             
-            default:
+        default:
             urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
                                                                        URLString:urlString
                                                                       parameters:params

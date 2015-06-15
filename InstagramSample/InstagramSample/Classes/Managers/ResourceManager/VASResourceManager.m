@@ -14,9 +14,12 @@
 #import "VASUser.h"
 #import "VASMedia.h"
 
-static NSString *const kUserInfoAPIUrl = @"users/%@/";
+static NSString *const kUserInfoAPIUrl = @"users/%@";
 static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
+
+static NSString *const kMediaInfoAPIUrl = @"media/%@";
+static NSString *const kPopularMediaAPIUrl = @"media/popular";
 
 @interface VASResourceManager()
 
@@ -40,6 +43,8 @@ static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
     }
     return self;
 }
+
+#pragma mark - Users
 
 - (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
                                         success:(CompletionBlockWithSuccess)success
@@ -92,6 +97,53 @@ static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:kUserSelfFeedAPIUrl
+                                           parameters:nil
+                                          resultClass:[VASMedia class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
+}
+
+#pragma mark - Media
+
+- (NSURLSessionDataTask *)requestMediaInfoWithID:(NSString *)mediaID
+                                         success:(CompletionBlockWithSuccess)success
+                                         failure:(CompletionBlockWithFailure)failure
+{
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:[NSString stringWithFormat:kMediaInfoAPIUrl, mediaID]
+                                           parameters:nil
+                                          resultClass:[VASMedia class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
+}
+
+- (NSURLSessionDataTask *)requestPopularMediaListWithSuccess:(CompletionBlockWithSuccess)success
+                                                     failure:(CompletionBlockWithFailure)failure
+{
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:kPopularMediaAPIUrl
                                            parameters:nil
                                           resultClass:[VASMedia class]
                                                forKey:@"data"

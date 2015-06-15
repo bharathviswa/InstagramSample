@@ -13,7 +13,7 @@ typedef void(^AuthPageViewModelCompletionBlockWithFailure)(NSError *error);
 
 @interface VASAuthPageViewModel : NSObject
 
-@property (nonatomic, strong) NSURLRequest *authUrlRequest;
+@property (nonatomic, strong) NSURLRequest *authenticationURLRequest;
 
 - (void)requestAccessTokenWithResponseCode:(NSString *)responseCode
                                    success:(AuthPageViewModelCompletionBlockWithSuccess)success

@@ -1,5 +1,5 @@
 //
-//  VASAuthProvider.h
+//  VASAuthenticationProvider.h
 //  InstagramSample
 //
 //  Created by Igor Vasilenko on 14/06/15.
@@ -13,10 +13,10 @@
 typedef void(^AuthProviderCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
 typedef void(^AuthProviderCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
 
-@interface VASAuthProvider : NSObject
+@interface VASAuthenticationProvider : NSObject
 
 @property (nonatomic, strong) VASAuthenticationConfigurator *configurator;
-@property (nonatomic, strong) NSURLRequest *authUrlRequest;
+@property (nonatomic, strong) NSURLRequest *authenticationURLRequest;
 
 #pragma mark - Initialize
 

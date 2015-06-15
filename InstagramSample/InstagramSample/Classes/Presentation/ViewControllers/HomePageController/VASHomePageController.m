@@ -52,7 +52,6 @@
 - (IBAction)logout:(id)sender
 {
     [self.viewModel logoutFromAccount];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"startPage"];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];

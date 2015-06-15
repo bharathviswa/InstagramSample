@@ -8,13 +8,13 @@
 
 #import "VASAuthPageViewModel.h"
 
-#import "VASAuthProvider.h"
+#import "VASAuthenticationProvider.h"
 #import "SSKeychain.h"
 #import "VASAuthenticationConfigurator.h"
 
 @interface VASAuthPageViewModel()
 
-@property (nonatomic, strong) VASAuthProvider *authProvider;
+@property (nonatomic, strong) VASAuthenticationProvider *authProvider;
 
 @end
 
@@ -24,14 +24,14 @@
 {
     if (self = [super init])
     {
-        _authProvider = [[VASAuthProvider alloc] initWithAuthenticationConfigurator:[VASAuthenticationConfigurator defaultConfigurator]];
+        _authProvider = [[VASAuthenticationProvider alloc] initWithAuthenticationConfigurator:[VASAuthenticationConfigurator defaultConfigurator]];
     }
     return self;
 }
 
-- (NSURLRequest *)authUrlRequest
+- (NSURLRequest *)authenticationURLRequest
 {
-    return self.authProvider.authUrlRequest;
+    return self.authProvider.authenticationURLRequest;
 }
 
 - (void)requestAccessTokenWithResponseCode:(NSString *)responseCode
@@ -45,6 +45,10 @@
                                                                        forService:kKeychainServiceName
                                                                           account:kKeychainAccountName];
                                                           success(YES);
+                                                      }
+                                                      else
+                                                      {
+                                                          success(NO);
                                                       }
                                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                       if (error) {

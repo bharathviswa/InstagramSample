@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) VASAuthPageViewModel *viewModel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -27,27 +28,37 @@
     self.viewModel = [VASAuthPageViewModel new];
     
     self.webView.delegate = self;
-    [self.webView loadRequest:self.viewModel.authUrlRequest];
+    [self.webView loadRequest:self.viewModel.authenticationURLRequest];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    if ([request.URL.absoluteString hasPrefix:kInstagramAPIRedirectUrl]) {
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ([request.URL.absoluteString hasPrefix:kInstagramAPIRedirectUrl])
+    {
+        [self.activityIndicator startAnimating];
+        
         NSArray *componentsURL = [request.URL.absoluteString componentsSeparatedByString:@"/?code="];
         NSString *responseCode = componentsURL[1];
         
         if (responseCode) {
+            self.webView.alpha = 0;
             [self.viewModel requestAccessTokenWithResponseCode:responseCode
                                                        success:^(BOOL success) {
                                                            if (success) {
+                                                               [self.activityIndicator stopAnimating];
                                                                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                                                                UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"homePage"];
                                                                UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
                                                                [self presentViewController:navController animated:YES completion:nil];
                                                            }
+                                                           else
+                                                           {
+                                                               [self.activityIndicator stopAnimating];
+                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                           }
                                                        } failure:^(NSError *error) {
                                                            if (error) {
-                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                               // show alert
                                                            }
                                                        }];
         }

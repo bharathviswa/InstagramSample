@@ -243,6 +243,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="0pA-Mc-gQN">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="4C1-OD-cDz"/>
+                                    <constraint firstAttribute="width" constant="37" id="7uB-ZG-EhS"/>
+                                </constraints>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -250,10 +258,13 @@
                             <constraint firstItem="HZk-DL-RGT" firstAttribute="leading" secondItem="B5t-bd-Cut" secondAttribute="leading" id="RfR-Nh-AVg"/>
                             <constraint firstItem="Sum-5v-zay" firstAttribute="top" secondItem="HZk-DL-RGT" secondAttribute="bottom" id="b7w-BI-q47"/>
                             <constraint firstAttribute="trailing" secondItem="HZk-DL-RGT" secondAttribute="trailing" id="rGX-3c-WOv"/>
+                            <constraint firstAttribute="centerY" secondItem="0pA-Mc-gQN" secondAttribute="centerY" id="uzt-57-h1p"/>
+                            <constraint firstAttribute="centerX" secondItem="0pA-Mc-gQN" secondAttribute="centerX" id="yPw-O4-EgK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="gqv-wo-Ypv"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="0pA-Mc-gQN" id="f6D-Wt-SyI"/>
                         <outlet property="webView" destination="HZk-DL-RGT" id="xEP-Y4-FaJ"/>
                     </connections>
                 </viewController>

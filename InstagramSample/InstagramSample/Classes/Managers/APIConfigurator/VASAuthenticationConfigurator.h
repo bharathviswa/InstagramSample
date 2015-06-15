@@ -10,9 +10,7 @@
 
 @interface VASAuthenticationConfigurator : NSObject
 
-+ (instancetype)defaultConfigurator;
-
-- (instancetype)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret;
+#pragma mark - Configuration properties
 
 @property (nonatomic, strong) NSString *clientID;
 @property (nonatomic, strong) NSString *clientSecret;
@@ -21,8 +19,16 @@
 @property (nonatomic, strong) NSDictionary *requestTokenBaseParameters;
 @property (nonatomic, strong) NSDictionary *authenticateBaseParameters;
 
-@property (nonatomic, strong) NSString *authorizeUrl;
-@property (nonatomic, strong) NSString *requestTokenUrl;
-@property (nonatomic, strong) NSString *redirectUrl;
+@property (nonatomic, strong) NSString *authenticateURL;
+@property (nonatomic, strong) NSString *requestTokenURL;
+@property (nonatomic, strong) NSString *redirectURL;
+
+#pragma mark - Initialize
+
++ (instancetype)defaultConfigurator;
+
+- (instancetype)initWithClientID:(NSString *)clientID
+                    clientSecret:(NSString *)clientSecret
+                     redirectURL:(NSString *)redirectURL;
 
 @end
