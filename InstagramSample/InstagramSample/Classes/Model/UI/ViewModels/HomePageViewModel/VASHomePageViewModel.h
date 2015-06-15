@@ -25,4 +25,6 @@
 
 @property (nonatomic, strong) RACCommand *updatePage;
 
+- (void)logoutFromAccount;
+
 @end

@@ -53,18 +53,23 @@
                                             
                                         }];
     
-//    [self.resourceManager requestRecentUserMediaListWithID:kInstagramMyUserID
-//                                                   success:^(NSArray *mediaList) {
-//                                                       NSLog(@"%@", mediaList);
-//                                                   } failure:^(NSError *error) {
-//                                                       
-//                                                   }];
-    
     [self.resourceManager requestSelfMediaFeedListWithSuccess:^(id responseObject) {
         NSLog(@"%@", responseObject);
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)logoutFromAccount
+{
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [SSKeychain deletePasswordForService:kKeychainServiceName
+                                 account:kKeychainAccountName];
 }
 
 - (RACCommand *)updatePage

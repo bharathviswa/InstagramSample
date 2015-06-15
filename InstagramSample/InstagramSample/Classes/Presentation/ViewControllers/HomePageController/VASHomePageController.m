@@ -9,6 +9,7 @@
 #import "VASHomePageController.h"
 
 #import "VASHomePageViewModel.h"
+#import "SSKeychain.h"
 
 @interface VASHomePageController ()
 
@@ -47,6 +48,15 @@
     RAC(self.countPostsLabel, text) = RACObserve(self.viewModel, countPostsLabelString);
     RAC(self.countFollowersLabel, text) = RACObserve(self.viewModel, countFollowersLabelString);
     RAC(self.countFollowingLabel, text) = RACObserve(self.viewModel, countFollowingLabelString);
+}
+- (IBAction)logout:(id)sender
+{
+    [self.viewModel logoutFromAccount];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"startPage"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end

@@ -169,7 +169,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="PwZ-jU-jst" secondAttribute="trailing" constant="-8" id="yMp-7G-hTh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4sO-KD-Az6"/>
+                    <navigationItem key="navigationItem" id="4sO-KD-Az6">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="AHa-gs-IG1">
+                            <connections>
+                                <action selector="logout:" destination="Pjn-BO-WSi" id="f50-Z3-Uk9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bioLabel" destination="PwZ-jU-jst" id="Smj-J5-dww"/>
                         <outlet property="countFollowersLabel" destination="H6b-zU-nbQ" id="Dis-HJ-I3X"/>
@@ -182,12 +188,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Cm-qX-jab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646" y="-10"/>
+            <point key="canvasLocation" x="1041" y="-10"/>
         </scene>
         <!--Start Page-->
         <scene sceneID="z7N-BR-Bg1">
             <objects>
-                <viewController id="eoF-bz-AdX" customClass="VASStartPageController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="startPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eoF-bz-AdX" customClass="VASStartPageController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dVR-S4-ql8"/>
                         <viewControllerLayoutGuide type="bottom" id="fCf-6v-8N9"/>
@@ -290,6 +296,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Plj-ef-5V0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-109" y="-10"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ddN-Mv-scQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c5U-96-Tb0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BOL-BP-dBt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Pjn-BO-WSi" kind="relationship" relationship="rootViewController" id="fNc-7N-RFV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Alk-64-sBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="646" y="-10"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

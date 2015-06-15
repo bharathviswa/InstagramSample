@@ -11,9 +11,11 @@
 typedef void(^VASSessionResponseSerializerAnyBlock)(NSURLSessionDataTask *task, id object);
 typedef void(^VASSessionResponseSerializerWithError)(NSURLSessionDataTask *task, NSError *error);
 
-@interface VASSessionResponseSerializer : AFJSONResponseSerializer
+@interface VASSessionResponseSerializer : NSObject
 
 @property (nonatomic, strong) dispatch_queue_t dispatch_queue;
+
++ (instancetype)serializer;
 
 - (void)parseJSON:(id)JSON
            forKey:(NSString *)key

@@ -12,6 +12,11 @@
 
 @implementation VASSessionResponseSerializer
 
++ (instancetype)serializer
+{
+    return [[self alloc] init];
+}
+
 - (instancetype)init
 {
     if (self = [super init]) {

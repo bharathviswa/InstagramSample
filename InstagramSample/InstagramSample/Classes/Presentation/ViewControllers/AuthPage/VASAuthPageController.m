@@ -47,7 +47,7 @@
                                                            }
                                                        } failure:^(NSError *error) {
                                                            if (error) {
-                                                               
+                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                            }
                                                        }];
         }

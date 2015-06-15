@@ -9,6 +9,7 @@
 #import "AFURLSessionManager.h"
 
 @class VASSessionResponseSerializer;
+@class VASAuthenticationConfigurator;
 
 typedef void(^SessionManagerCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
 typedef void(^SessionManagerCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
@@ -22,6 +23,19 @@ typedef NS_ENUM(NSUInteger, VASHTTPMethod) {
 };
 
 @interface VASSessionManager : AFURLSessionManager
+
+#pragma mark - Authentication
+
+@property (nonatomic, strong) NSURLRequest *authenticationRequest;
+
+- (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
+                 authenticationConfiguration:(VASAuthenticationConfigurator *)authenticationConfiguration;
+
+- (NSURLSessionDataTask *)requestAccessTokenWithResponseCode:(NSString *)responseCode
+                                                     success:(SessionManagerCompletionBlockWithSuccess)success
+                                                     failure:(SessionManagerCompletionBlockWithFailure)failure;
+
+#pragma mark - HTTP Request's
 
 @property (nonatomic, strong, readonly) VASSessionResponseSerializer *sessionResponseSerializer;
 

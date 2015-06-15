@@ -9,6 +9,8 @@
 #import "VASAuthProvider.h"
 
 #import "VASSessionManager.h"
+#import <AFNetworking/AFURLRequestSerialization.h>
+#import "VASAuthenticationConfigurator.h"
 
 @interface VASAuthProvider()
 
@@ -20,23 +22,15 @@
 
 #pragma mark - Initialize
 
-- (instancetype)initWithBaseURL:(NSURL *)baseURL
-                       clientID:(NSString *)clientID
-                   clientSecret:(NSString *)clientSecret
+- (instancetype)initWithAuthenticationConfigurator:(VASAuthenticationConfigurator *)configurator;
 {
     if (self = [super init]) {
         
-        NSDictionary *parameters = [@{
-                                      @"client_id" : clientID,
-                                      @"client_secret" : clientSecret,
-                                      @"grant_type" : @"authorization_code",
-                                      @"redirect_uri" : kInstagramAPIRedirectUrl
-                                      } mutableCopy];
-        
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _sessionManager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfig
-                                                                          baseURL:baseURL
-                                                                   baseParameters:parameters];
+        _configurator = configurator;
+
+        _sessionManager = [[VASSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                                          baseURL:[NSURL URLWithString:self.configurator.requestTokenUrl]
+                                                                   baseParameters:self.configurator.requestTokenBaseParameters];
     }
     return self;
 }
@@ -45,18 +39,10 @@
 
 - (NSURLRequest *)authUrlRequest
 {
-
-    NSString *fullAuthUrlString = [[NSString alloc]
-                                   initWithFormat:@"%@?client_id=%@&redirect_uri=%@&response_type=code",
-                                   kInstagramAuthURL,
-                                   kInstagramAPIClientID,
-                                   kInstagramAPIRedirectUrl
-                                   ];
-    
-    NSURL *authUrl = [NSURL URLWithString:fullAuthUrlString];
-    NSURLRequest *authUrlRequest = [[NSURLRequest alloc] initWithURL:authUrl];
-    
-    return authUrlRequest;
+    return [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                         URLString:self.configurator.authorizeUrl
+                                                        parameters:self.configurator.authenticateBaseParameters
+                                                             error:NULL];
 }
 
 #pragma mark - Access Token Request
@@ -77,12 +63,12 @@
                                                                  success(task, accessToken);
                                                              }
                                                          }
-                                                     }
-                                                     failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                                         if (error) {
-                                                             failure(task, error);
+                                                         else
+                                                         {
+                                                             success(task, responseObject);
                                                          }
-                                                     }];
+                                                     }
+                                                     failure:failure];
     [task resume];
 }
 

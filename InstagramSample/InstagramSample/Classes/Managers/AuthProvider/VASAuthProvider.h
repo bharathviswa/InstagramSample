@@ -8,18 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class VASAuthenticationConfigurator;
+
 typedef void(^AuthProviderCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
 typedef void(^AuthProviderCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
 
 @interface VASAuthProvider : NSObject
 
+@property (nonatomic, strong) VASAuthenticationConfigurator *configurator;
 @property (nonatomic, strong) NSURLRequest *authUrlRequest;
 
 #pragma mark - Initialize
 
-- (instancetype)initWithBaseURL:(NSURL *)baseURL
-                       clientID:(NSString *)clientID
-                   clientSecret:(NSString *)clientSecret;
+- (instancetype)initWithAuthenticationConfigurator:(VASAuthenticationConfigurator *)configurator;
 
 #pragma mark - Access Token Request
 

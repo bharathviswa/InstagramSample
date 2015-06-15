@@ -10,6 +10,7 @@
 
 #import "VASAuthProvider.h"
 #import "SSKeychain.h"
+#import "VASAuthenticationConfigurator.h"
 
 @interface VASAuthPageViewModel()
 
@@ -23,9 +24,7 @@
 {
     if (self = [super init])
     {
-        _authProvider = [[VASAuthProvider alloc] initWithBaseURL:[NSURL URLWithString:kInstagramAuthToken]
-                                                        clientID:kInstagramAPIClientID
-                                                    clientSecret:kInstagramAPIClientSecret];
+        _authProvider = [[VASAuthProvider alloc] initWithAuthenticationConfigurator:[VASAuthenticationConfigurator defaultConfigurator]];
     }
     return self;
 }

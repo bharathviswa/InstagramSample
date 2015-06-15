@@ -13,7 +13,7 @@
 @interface VASSessionManager()
 
 @property (nonatomic, strong) NSURL *baseURL;
-@property (nonatomic, strong) NSMutableDictionary *parameters;
+@property (nonatomic, strong) NSDictionary *baseParameters;
 
 @end
 
@@ -23,11 +23,11 @@
                                      baseURL:(NSURL *)baseURL
                               baseParameters:(id)parameters
 {
-    if (self == [super initWithSessionConfiguration:configuration]) {
+    if (self == [super initWithSessionConfiguration:configuration])
+    {
         _baseURL = baseURL;
-        _parameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+        _baseParameters = parameters;
         _sessionResponseSerializer = [VASSessionResponseSerializer serializer];
-        self.responseSerializer = _sessionResponseSerializer;
     }
     return self;
 }
@@ -40,35 +40,11 @@
                          success:(SessionManagerCompletionBlockWithSuccess)success
                          failure:(SessionManagerCompletionBlockWithFailure)failure
 {
-    switch (method) {
-        case VASHTTPMethodGET:
-            return [self GET:URLString
-                  parameters:parameters
-                     success:success
-                     failure:failure];
-            break;
-        case VASHTTPMethodPOST:
-            return [self POST:URLString
-                   parameters:parameters
-                      success:success
-                      failure:failure];
-            break;
-        case VASHTTPMethodPUT:
-            return nil;
-            break;
-        case VASHTTPMethodPATCH:
-            return nil;
-            break;
-        case VASHTTPMethodDELETE:
-            return nil;
-            break;
-
-        default:
-            return [self GET:URLString
-                  parameters:parameters
-                     success:success
-                     failure:failure];
-    }
+    return [self dataTaskWithMethod:method
+                          URLString:URLString
+                         parameters:parameters
+                            success:success
+                            failure:failure];
 }
 
 - (NSURLSessionDataTask *)method:(VASHTTPMethod)method
@@ -96,63 +72,69 @@
 }
 
 #pragma mark - HTTP Methods Data Tasks
-#pragma mark GET
 
-- (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(id)parameters
-                      success:(SessionManagerCompletionBlockWithSuccess)success
-                      failure:(SessionManagerCompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)dataTaskWithMethod:(VASHTTPMethod)method
+                                   URLString:(NSString *)URLString
+                                  parameters:(id)parameters
+                                     success:(SessionManagerCompletionBlockWithSuccess)success
+                                     failure:(SessionManagerCompletionBlockWithFailure)failure
 {
-    [self.parameters addEntriesFromDictionary:parameters];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:self.baseParameters];
+    [params addEntriesFromDictionary:parameters];
+    
     NSString *urlString = [[NSURL URLWithString:URLString? : [NSString string] relativeToURL:self.baseURL] absoluteString];
+    NSURLRequest *urlRequest;
     
-    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
-                                                                             URLString:urlString
-                                                                            parameters:self.parameters
-                                                                                 error:NULL];
-    __block NSURLSessionDataTask *dataTask = nil;
+    switch (method) {
+        case VASHTTPMethodGET:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+            break;
+        case VASHTTPMethodPOST:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+            break;
+        case VASHTTPMethodPUT:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"PUT"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+            break;
+        case VASHTTPMethodPATCH:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"PATCH"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+            break;
+        case VASHTTPMethodDELETE:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"DELETE"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+            break;
+            
+            default:
+            urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
+                                                                       URLString:urlString
+                                                                      parameters:params
+                                                                           error:NULL];
+    }
     
-    dataTask = [self dataTaskWithRequest:urlRequest
-                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                           if (error)
-                           {
-                               failure(dataTask, error);
-                           }
-                           else
-                           {
-                               success(dataTask, responseObject);
-                           }
-                       }];
-    return dataTask;
-}
-
-#pragma mark POST
-
-- (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(id)parameters
-                       success:(SessionManagerCompletionBlockWithSuccess)success
-                       failure:(SessionManagerCompletionBlockWithFailure)failure
-{
-    [self.parameters addEntriesFromDictionary:parameters];
-    NSString *urlString = [[NSURL URLWithString:URLString? : [NSString string] relativeToURL:self.baseURL] absoluteString];
-    
-    NSURLRequest *urlRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
-                                                                             URLString:urlString
-                                                                            parameters:self.parameters
-                                                                                 error:NULL];
-    __block NSURLSessionDataTask *dataTask = nil;
-    
-    dataTask = [self dataTaskWithRequest:urlRequest
-                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                           if (error)
-                           {
-                               failure(dataTask, error);
-                           }
-                           else
-                           {
-                               success(dataTask, responseObject);
-                           }
-                       }];
+    NSURLSessionDataTask *dataTask = [self dataTaskWithRequest:urlRequest
+                                             completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                                 if (error)
+                                                 {
+                                                     failure(dataTask, error);
+                                                 }
+                                                 else
+                                                 {
+                                                     success(dataTask, responseObject);
+                                                 }
+                                             }];
     return dataTask;
 }
 

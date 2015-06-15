@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "AFNetworking.h"
+#import "SSKeychain.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    NSString *accessToken = [SSKeychain passwordForService:kKeychainServiceName account:kKeychainAccountName];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController *controller;
+    
+    if (accessToken) {
+        UIViewController *homePagecontroller = [storyboard instantiateViewControllerWithIdentifier:@"homePage"];
+        controller = [[UINavigationController alloc] initWithRootViewController:homePagecontroller];
+    }
+    else
+    {
+        controller = [storyboard instantiateInitialViewController];
+    }
+    
+    self.window.rootViewController = controller;
+    
     return YES;
 }
 
