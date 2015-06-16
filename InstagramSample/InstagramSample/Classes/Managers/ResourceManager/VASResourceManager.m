@@ -17,16 +17,16 @@
 
 // Users methods
 
-static NSString *const kUserInfoAPIUrl = @"users/%@";
+static NSString *const kUserInfoAPIMethod = @"users/%@";
 static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
-static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
-static NSString *const kUserFollowsList = @"users/%@/follows";
-static NSString *const kUserFollowedByList = @"users/%@/followed-by";
+static NSString *const kUserSelfFeedAPIMethod = @"users/self/feed";
+static NSString *const kUserFollowsListMethod = @"users/%@/follows";
+static NSString *const kUserFollowedByListMethod = @"users/%@/followed-by";
 
 // Media methods
 
-static NSString *const kMediaInfoAPIUrl = @"media/%@";
-static NSString *const kPopularMediaAPIUrl = @"media/popular";
+static NSString *const kMediaInfoAPIMethod = @"media/%@";
+static NSString *const kPopularMediaAPIMethod = @"media/popular";
 
 @interface VASResourceManager()
 
@@ -55,7 +55,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                  failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:[NSString stringWithFormat:kUserInfoAPIUrl, userID]
+                                            URLString:[NSString stringWithFormat:kUserInfoAPIMethod, userID]
                                            parameters:nil
                                           resultClass:[VASUser class]
                                                forKey:@"data"
@@ -100,7 +100,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                                failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kUserSelfFeedAPIUrl
+                                            URLString:kUserSelfFeedAPIMethod
                                            parameters:nil
                                           resultClass:[VASMedia class]
                                                forKey:@"data"
@@ -123,7 +123,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                         failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kUserFollowsList
+                                            URLString:kUserFollowsListMethod
                                            parameters:nil
                                           resultClass:[VASUser class]
                                                forKey:@"data"
@@ -146,7 +146,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                            failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kUserFollowedByList
+                                            URLString:kUserFollowedByListMethod
                                            parameters:nil
                                           resultClass:[VASUser class]
                                                forKey:@"data"
@@ -171,7 +171,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                   failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:[NSString stringWithFormat:kMediaInfoAPIUrl, mediaID]
+                                            URLString:[NSString stringWithFormat:kMediaInfoAPIMethod, mediaID]
                                            parameters:nil
                                           resultClass:[VASMedia class]
                                                forKey:@"data"
@@ -193,7 +193,7 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
                                               failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kPopularMediaAPIUrl
+                                            URLString:kPopularMediaAPIMethod
                                            parameters:nil
                                           resultClass:[VASMedia class]
                                                forKey:@"data"
