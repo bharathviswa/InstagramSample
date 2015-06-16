@@ -9,7 +9,7 @@
 #import "AFURLSessionManager.h"
 
 @class VASSessionResponseSerializer;
-@class VASAuthenticationConfigurator;
+@class VASAPIConfigurator;
 
 typedef void(^SessionManagerCompletionBlockWithSuccess)(NSURLSessionDataTask *task, id responseObject);
 typedef void(^SessionManagerCompletionBlockWithFailure)(NSURLSessionDataTask *task, NSError *error);
@@ -27,8 +27,7 @@ typedef NS_ENUM(NSUInteger, VASHTTPMethod) {
 @property (nonatomic, strong, readonly) VASSessionResponseSerializer *sessionResponseSerializer;
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
-                                     baseURL:(NSURL *)baseURL
-                              baseParameters:(id)parameters;
+                            configurationAPI:(VASAPIConfigurator *)configurationAPI;
 
 - (NSURLSessionDataTask *)method:(VASHTTPMethod)method
                        URLString:(NSString *)URLString

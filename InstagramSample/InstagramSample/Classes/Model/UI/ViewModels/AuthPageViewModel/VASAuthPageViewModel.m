@@ -10,7 +10,7 @@
 
 #import "VASAuthenticationProvider.h"
 #import "SSKeychain.h"
-#import "VASAuthenticationConfigurator.h"
+#import "VASAPIConfigurator.h"
 
 @interface VASAuthPageViewModel()
 
@@ -24,7 +24,7 @@
 {
     if (self = [super init])
     {
-        _authProvider = [[VASAuthenticationProvider alloc] initWithAuthenticationConfigurator:[VASAuthenticationConfigurator defaultConfigurator]];
+        _authProvider = [[VASAuthenticationProvider alloc] initWithAuthenticationConfigurator:[VASAPIConfigurator authenticationConfigurator]];
     }
     return self;
 }
@@ -41,9 +41,7 @@
     [self.authProvider requestAccessTokenWithResponseCode:responseCode
                                                   success:^(NSURLSessionDataTask *task, NSString *accessToken) {
                                                       if (accessToken) {
-                                                          [SSKeychain setPassword:accessToken
-                                                                       forService:kKeychainServiceName
-                                                                          account:kKeychainAccountName];
+                                                          [CredentialStorage setAccessToken:accessToken];
                                                           success(YES);
                                                       }
                                                       else

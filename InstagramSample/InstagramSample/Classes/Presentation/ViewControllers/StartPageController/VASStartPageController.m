@@ -9,7 +9,6 @@
 #import "VASStartPageController.h"
 
 #import "SSKeychain.h"
-#import "VASAuthenticationConfigurator.h"
 
 @interface VASStartPageController ()
 

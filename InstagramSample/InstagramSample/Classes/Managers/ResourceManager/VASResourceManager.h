@@ -8,31 +8,39 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^CompletionBlockWithSuccess)(id responseObject);
-typedef void(^CompletionBlockWithFailure)(NSError *error);
+typedef void(^ResourceManagerCompletionBlockWithSuccess)(id responseObject);
+typedef void(^ResourceManagerCompletionBlockWithFailure)(NSError *error);
 
 @interface VASResourceManager : NSObject
 
 #pragma mark - Users
 
-- (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
-                                        success:(CompletionBlockWithSuccess)success
-                                        failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)userInfoWithID:(NSString *)userID
+                                 success:(ResourceManagerCompletionBlockWithSuccess)success
+                                 failure:(ResourceManagerCompletionBlockWithFailure)failure;
 
-- (NSURLSessionDataTask *)requestRecentUserMediaListWithID:(NSString *)userID
-                                                   success:(CompletionBlockWithSuccess)success
-                                                   failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)recentUserMediaListWithID:(NSString *)userID
+                                            success:(ResourceManagerCompletionBlockWithSuccess)success
+                                            failure:(ResourceManagerCompletionBlockWithFailure)failure;
 
-- (NSURLSessionDataTask *)requestSelfMediaFeedListWithSuccess:(CompletionBlockWithSuccess)success
-                                                      failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)selfMediaFeedListWithSuccess:(ResourceManagerCompletionBlockWithSuccess)success
+                                               failure:(ResourceManagerCompletionBlockWithFailure)failure;
+
+- (NSURLSessionDataTask *)userFollowsListWithID:(NSString *)userID
+                                        success:(ResourceManagerCompletionBlockWithSuccess)success
+                                        failure:(ResourceManagerCompletionBlockWithFailure)failure;
+
+- (NSURLSessionDataTask *)userFollowedByListWithID:(NSString *)userID
+                                           success:(ResourceManagerCompletionBlockWithSuccess)success
+                                           failure:(ResourceManagerCompletionBlockWithFailure)failure;
 
 #pragma mark - Media
 
-- (NSURLSessionDataTask *)requestMediaInfoWithID:(NSString *)mediaID
-                                         success:(CompletionBlockWithSuccess)success
-                                         failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)mediaInfoWithID:(NSString *)mediaID
+                                  success:(ResourceManagerCompletionBlockWithSuccess)success
+                                  failure:(ResourceManagerCompletionBlockWithFailure)failure;
 
-- (NSURLSessionDataTask *)requestPopularMediaListWithSuccess:(CompletionBlockWithSuccess)success
-                                                     failure:(CompletionBlockWithFailure)failure;
+- (NSURLSessionDataTask *)popularMediaListWithSuccess:(ResourceManagerCompletionBlockWithSuccess)success
+                                              failure:(ResourceManagerCompletionBlockWithFailure)failure;
 
 @end

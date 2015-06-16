@@ -10,12 +10,13 @@
 
 #import "VASSessionManager.h"
 #import <AFNetworking/AFURLRequestSerialization.h>
-#import "VASAuthenticationConfigurator.h"
+#import "VASAPIConfigurator.h"
 #import "VASUser.h"
 
 @interface VASAuthenticationProvider()
 
 @property (nonatomic, strong) VASSessionManager *manager;
+@property (nonatomic, strong) VASAPIConfigurator *configurator;
 
 @end
 
@@ -23,15 +24,14 @@
 
 #pragma mark - Initialize
 
-- (instancetype)initWithAuthenticationConfigurator:(VASAuthenticationConfigurator *)configurator;
+- (instancetype)initWithAuthenticationConfigurator:(VASAPIConfigurator *)configurator;
 {
     if (self = [super init]) {
 
         _configurator = configurator;
         
         _manager = [[VASSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                                   baseURL:[NSURL URLWithString:self.configurator.requestTokenURL]
-                                                            baseParameters:self.configurator.requestTokenBaseParameters];
+                                                          configurationAPI:configurator];
     }
     return self;
 }
@@ -58,15 +58,15 @@
                                                         @"code" : responseCode
                                                         }
                                               success:^(NSURLSessionDataTask *task, id responseObject) {
-                                                  if (responseObject) {
+                                                  if (responseObject)
+                                                  {
                                                       NSString *accessToken = responseObject[@"access_token"];
                                                       
                                                       VASUser *user = [MTLJSONAdapter modelOfClass:[VASUser class]
                                                                                 fromJSONDictionary:responseObject[@"user"]
                                                                                              error:NULL];
-                                                      NSUserDefaults *UD = [NSUserDefaults standardUserDefaults];
-                                                      [UD setObject:user.uid forKey:@"userID"];
-                                                      [UD synchronize];
+                                                      
+                                                      [CredentialStorage setCurrentAuthenticatedUserID:user.uid];
                                                       
                                                       if (accessToken) {
                                                           success(task, accessToken);

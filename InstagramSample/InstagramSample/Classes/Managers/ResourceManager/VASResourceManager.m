@@ -13,10 +13,17 @@
 #import "VASSessionManager.h"
 #import "VASUser.h"
 #import "VASMedia.h"
+#import "VASAPIConfigurator.h"
+
+// Users methods
 
 static NSString *const kUserInfoAPIUrl = @"users/%@";
 static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 static NSString *const kUserSelfFeedAPIUrl = @"users/self/feed";
+static NSString *const kUserFollowsList = @"users/%@/follows";
+static NSString *const kUserFollowedByList = @"users/%@/followed-by";
+
+// Media methods
 
 static NSString *const kMediaInfoAPIUrl = @"media/%@";
 static NSString *const kPopularMediaAPIUrl = @"media/popular";
@@ -33,22 +40,19 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
 {
     if (self = [super init])
     {
-        NSString *accessToken = [SSKeychain passwordForService:kKeychainServiceName
-                                                       account:kKeychainAccountName];
-        
+        VASAPIConfigurator *configuratorAPI = [VASAPIConfigurator baseConfigurator];
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _manager = [[VASSessionManager alloc] initWithSessionConfiguration:sessionConfiguration
-                                                                   baseURL:[NSURL URLWithString:kInstagramBaseAPIUrl]
-                                                            baseParameters:@{@"access_token" : accessToken}];
+                                                          configurationAPI:configuratorAPI];
     }
     return self;
 }
 
 #pragma mark - Users
 
-- (NSURLSessionDataTask *)requestUserInfoWithID:(NSString *)userID
-                                        success:(CompletionBlockWithSuccess)success
-                                        failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)userInfoWithID:(NSString *)userID
+                                 success:(ResourceManagerCompletionBlockWithSuccess)success
+                                 failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:[NSString stringWithFormat:kUserInfoAPIUrl, userID]
@@ -69,9 +73,9 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
     return task;
 }
 
-- (NSURLSessionDataTask *)requestRecentUserMediaListWithID:(NSString *)userID
-                                                   success:(CompletionBlockWithSuccess)success
-                                                   failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)recentUserMediaListWithID:(NSString *)userID
+                                            success:(ResourceManagerCompletionBlockWithSuccess)success
+                                            failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:[NSString stringWithFormat:kUserRecentMediaAPIMethod, userID]
@@ -92,8 +96,8 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
     return task;
 }
 
-- (NSURLSessionDataTask *)requestSelfMediaFeedListWithSuccess:(CompletionBlockWithSuccess)success
-                                                      failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)selfMediaFeedListWithSuccess:(ResourceManagerCompletionBlockWithSuccess)success
+                                               failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:kUserSelfFeedAPIUrl
@@ -114,11 +118,57 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
     return task;
 }
 
+- (NSURLSessionDataTask *)userFollowsListWithID:(NSString *)userID
+                                        success:(ResourceManagerCompletionBlockWithSuccess)success
+                                        failure:(ResourceManagerCompletionBlockWithFailure)failure
+{
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:kUserFollowsList
+                                           parameters:nil
+                                          resultClass:[VASUser class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
+}
+
+- (NSURLSessionDataTask *)userFollowedByListWithID:(NSString *)userID
+                                           success:(ResourceManagerCompletionBlockWithSuccess)success
+                                           failure:(ResourceManagerCompletionBlockWithFailure)failure
+{
+    NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
+                                            URLString:kUserFollowedByList
+                                           parameters:nil
+                                          resultClass:[VASUser class]
+                                               forKey:@"data"
+                                              success:^(NSURLSessionDataTask *task, id responseObject) {
+                                                  if (responseObject) {
+                                                      success(responseObject);
+                                                  }
+                                              } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                                  if (error) {
+                                                      failure(error);
+                                                  }
+                                              }];
+    [task resume];
+    
+    return task;
+}
+
 #pragma mark - Media
 
-- (NSURLSessionDataTask *)requestMediaInfoWithID:(NSString *)mediaID
-                                         success:(CompletionBlockWithSuccess)success
-                                         failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)mediaInfoWithID:(NSString *)mediaID
+                                  success:(ResourceManagerCompletionBlockWithSuccess)success
+                                  failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:[NSString stringWithFormat:kMediaInfoAPIUrl, mediaID]
@@ -139,8 +189,8 @@ static NSString *const kPopularMediaAPIUrl = @"media/popular";
     return task;
 }
 
-- (NSURLSessionDataTask *)requestPopularMediaListWithSuccess:(CompletionBlockWithSuccess)success
-                                                     failure:(CompletionBlockWithFailure)failure
+- (NSURLSessionDataTask *)popularMediaListWithSuccess:(ResourceManagerCompletionBlockWithSuccess)success
+                                              failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
                                             URLString:kPopularMediaAPIUrl

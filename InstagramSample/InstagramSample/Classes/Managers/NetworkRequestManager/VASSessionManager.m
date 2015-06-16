@@ -9,6 +9,7 @@
 #import "VASSessionManager.h"
 
 #import "VASSessionResponseSerializer.h"
+#import "VASAPIConfigurator.h"
 
 @interface VASSessionManager()
 
@@ -20,13 +21,11 @@
 @implementation VASSessionManager
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration
-                                     baseURL:(NSURL *)baseURL
-                              baseParameters:(id)parameters
+                            configurationAPI:(VASAPIConfigurator *)configurationAPI
 {
-    if (self == [super initWithSessionConfiguration:configuration])
-    {
-        _baseURL = baseURL;
-        _baseParameters = parameters;
+    if (self == [super initWithSessionConfiguration:configuration]) {
+        _baseURL = configurationAPI.baseAPIURL;
+        _baseParameters = configurationAPI.baseParameters;
         _sessionResponseSerializer = [VASSessionResponseSerializer serializer];
     }
     return self;
