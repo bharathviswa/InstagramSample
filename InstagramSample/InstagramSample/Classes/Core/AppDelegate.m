@@ -21,12 +21,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    NSString *accessToken = [SSKeychain passwordForService:kKeychainServiceName account:kKeychainAccountName];
+    NSString *accessToken = [CredentialStorage accessToken];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     UIViewController *controller;
     
-    if (accessToken) {
+    if (accessToken)
+    {
         UIViewController *homePagecontroller = [storyboard instantiateViewControllerWithIdentifier:@"homePage"];
         controller = [[UINavigationController alloc] initWithRootViewController:homePagecontroller];
     }

@@ -12,6 +12,8 @@
 
 @interface VASStartPageController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *authButton;
+
 @end
 
 @implementation VASStartPageController
@@ -19,16 +21,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.authButton.layer.masksToBounds = YES;
+    self.authButton.layer.cornerRadius = 15;
 }
 
 - (IBAction)goToAuthPage:(id)sender
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
-    NSString *password = [SSKeychain passwordForService:kKeychainServiceName
-                                                account:kKeychainAccountName];
+    NSString *accessToken = [CredentialStorage accessToken];
     
-    if (password)
+    if (accessToken)
     {
         UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"homePage"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
@@ -37,8 +41,7 @@
     else
     {
         UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"authPage"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        [self presentViewController:navController animated:YES completion:nil];
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 

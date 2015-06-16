@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIImage *userPictureImage;
 
 @property (nonatomic, strong) RACCommand *updatePage;
+@property (nonatomic, strong) RACSignal *errorSignal;
 
 - (void)reloadPage;
 - (void)logoutFromAccount;

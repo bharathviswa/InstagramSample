@@ -41,7 +41,7 @@
 - (NSURLRequest *)authenticationURLRequest
 {
     return [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET"
-                                                         URLString:self.configurator.authenticateURL
+                                                         URLString:self.configurator.authenticateURLString
                                                         parameters:self.configurator.authenticateBaseParameters
                                                              error:NULL];
 }
@@ -62,7 +62,8 @@
                                                   {
                                                       NSString *accessToken = responseObject[@"access_token"];
                                                       
-                                                      if (accessToken) {
+                                                      if (accessToken)
+                                                      {
                                                           [CredentialStorage setAccessToken:accessToken];
                                                           
                                                           VASUser *user = [MTLJSONAdapter modelOfClass:[VASUser class]
@@ -73,10 +74,6 @@
                                                           
                                                           success(task, accessToken);
                                                       }
-                                                  }
-                                                  else
-                                                  {
-                                                      success(task, responseObject);
                                                   }
                                               }
                                               failure:failure];

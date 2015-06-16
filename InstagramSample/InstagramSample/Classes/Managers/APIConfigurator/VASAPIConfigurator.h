@@ -20,8 +20,6 @@ typedef NS_ENUM(NSUInteger, VASAPIConfiguratorType) {
 @property (nonatomic, strong) NSURL *baseAPIURL;
 @property (nonatomic, strong) NSDictionary *baseParameters;
 
-- (instancetype)initWithBaseAPIURL:(NSURL *)baseAPIURL;
-
 #pragma mark - Authentication
 
 @property (nonatomic, strong) NSString *clientID;
@@ -30,16 +28,14 @@ typedef NS_ENUM(NSUInteger, VASAPIConfiguratorType) {
 
 @property (nonatomic, strong) NSDictionary *authenticateBaseParameters;
 
-@property (nonatomic, strong) NSString *authenticateURL;
-@property (nonatomic, strong) NSString *requestTokenURL;
-@property (nonatomic, strong) NSString *redirectURL;
+@property (nonatomic, strong) NSString *authenticateURLString;
+@property (nonatomic, strong) NSString *requestTokenURLString;
+@property (nonatomic, strong) NSString *redirectURLString;
 
 #pragma mark - Initialize
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
-                       clientID:(NSString *)clientID
-                   clientSecret:(NSString *)clientSecret
-                    redirectURL:(NSString *)redirectURL;
+                 baseParameters:(id)parameters;
 
 + (instancetype)baseConfigurator;
 + (instancetype)authenticationConfigurator;

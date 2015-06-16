@@ -10,11 +10,11 @@
 
 #import "VASResourceManager.h"
 #import "VASUser.h"
-#import "SSKeychain.h"
 
 @interface VASHomePageViewModel()
 
 @property (nonatomic, strong) VASResourceManager *resourceManager;
+@property (nonatomic, strong) RACSubject *errorSubject;
 
 @end
 
@@ -25,6 +25,7 @@
     self = [super init];
     if (self) {
         self.resourceManager = [[VASResourceManager alloc] init];
+        self.errorSubject = [RACSubject subject];
         [self loadData];
     }
     return self;
@@ -50,8 +51,15 @@
                                      }
                                      
                                  } failure:^(NSError *error) {
-                                     
+                                     [self.errorSubject sendNext:error];
                                  }];
+    
+    [self.resourceManager userFollowsListWithID:[CredentialStorage currentAuthenticatedUserID]
+                                        success:^(id responseObject) {
+                                            NSLog(@"%@", responseObject);
+                                        } failure:^(NSError *error) {
+                                            
+                                        }];
 }
 
 - (void)logoutFromAccount
@@ -63,6 +71,11 @@
 - (void)reloadPage
 {
     [self loadData];
+}
+
+- (RACSignal *)errorSignal
+{
+    return self.errorSubject;
 }
 
 @end

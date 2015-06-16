@@ -18,6 +18,16 @@
 
 #pragma mark - Initialize
 
+- (instancetype)initWithBaseURL:(NSURL *)baseURL
+                 baseParameters:(id)parameters
+{
+    if (self = [self initWithConfiguratorType:VASAPIConfiguratorBase]) {
+        _baseAPIURL = baseURL;
+        _baseParameters = parameters;
+    }
+    return self;
+}
+
 + (instancetype)baseConfigurator
 {
     return [[self alloc] initWithConfiguratorType:VASAPIConfiguratorBase];
@@ -28,32 +38,10 @@
     return [[self alloc] initWithConfiguratorType:VASAPIConfiguratorAuth];
 }
 
-- (instancetype)initWithBaseURL:(NSURL *)baseURL
-                       clientID:(NSString *)clientID
-                   clientSecret:(NSString *)clientSecret
-                    redirectURL:(NSString *)redirectURL
-{
-    if (self = [self initWithConfiguratorType:VASAPIConfiguratorAuth]) {
-        _baseAPIURL = baseURL;
-        _clientID = clientID;
-        _clientSecret = clientSecret;
-        _redirectURL = redirectURL;
-    }
-    return self;
-}
-
 - (instancetype)initWithConfiguratorType:(VASAPIConfiguratorType)configuratorType
 {
     if (self = [super init]) {
         _configuratorType = configuratorType;
-    }
-    return self;
-}
-
-- (instancetype)initWithBaseAPIURL:(NSURL *)baseAPIURL
-{
-    if (self = [super init]) {
-        _baseAPIURL = baseAPIURL;
     }
     return self;
 }
@@ -92,7 +80,7 @@
                      @"client_id" : self.clientID,
                      @"client_secret" : self.clientSecret,
                      @"grant_type" : self.grantType,
-                     @"redirect_uri" : self.redirectURL
+                     @"redirect_uri" : self.redirectURLString
                      };
         default:
             return @{
@@ -135,33 +123,33 @@
 {
     return @{
              @"client_id" : self.clientID,
-             @"redirect_uri" : self.redirectURL,
+             @"redirect_uri" : self.redirectURLString,
              @"response_type" : @"code"
              };
 }
 
-- (NSString *)authenticateURL
+- (NSString *)authenticateURLString
 {
-    if (_authenticateURL) {
-        return _authenticateURL;
+    if (_authenticateURLString) {
+        return _authenticateURLString;
     }
     // default
     return @"https://instagram.com/oauth/authorize/";
 }
 
-- (NSString *)requestTokenURL
+- (NSString *)requestTokenURLString
 {
-    if (_requestTokenURL) {
-        return _requestTokenURL;
+    if (_requestTokenURLString) {
+        return _requestTokenURLString;
     }
     // default
     return @"https://api.instagram.com/oauth/access_token/";
 }
 
-- (NSString *)redirectURL
+- (NSString *)redirectURLString
 {
-    if (_redirectURL) {
-        return _redirectURL;
+    if (_redirectURLString) {
+        return _redirectURLString;
     }
     // default
     return @"http://spbvasilenko.github.com";

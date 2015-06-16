@@ -9,7 +9,6 @@
 #import "VASHomePageController.h"
 
 #import "VASHomePageViewModel.h"
-#import "SSKeychain.h"
 
 @interface VASHomePageController ()
 
@@ -25,6 +24,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *countPostsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countFollowersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countFollowingLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *followesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postsLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @end
 
@@ -56,6 +60,17 @@
     RAC(self.countPostsLabel, text) = RACObserve(self.viewModel, countPostsLabelString);
     RAC(self.countFollowersLabel, text) = RACObserve(self.viewModel, countFollowersLabelString);
     RAC(self.countFollowingLabel, text) = RACObserve(self.viewModel, countFollowingLabelString);
+    
+    [self.viewModel.errorSignal subscribeNext:^(NSError *error) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка"
+                                                                                 message:error.localizedDescription
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть"
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:nil]];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }];
 }
 
 - (void)reloadPage

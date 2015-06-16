@@ -10,12 +10,6 @@
 
 #import "SSKeychain.h"
 
-@interface VASCredentialStorage()
-
-@property (nonatomic, strong) NSUserDefaults *UD;
-
-@end
-
 @implementation VASCredentialStorage
 
 + (instancetype)sharedInstance
@@ -25,7 +19,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
-        sharedInstance.UD = [NSUserDefaults standardUserDefaults];
     });
     return sharedInstance;
 }
@@ -34,13 +27,13 @@
 
 - (void)setCurrentAuthenticatedUserID:(NSString *)currentAuthenticatedUserID
 {
-    [self.UD setObject:currentAuthenticatedUserID forKey:@"userID"];
-    [self.UD synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:currentAuthenticatedUserID forKey:@"userID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSString *)currentAuthenticatedUserID
 {
-    return [self.UD objectForKey:@"userID"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
 }
 
 - (void)setAccessToken:(NSString *)accessToken

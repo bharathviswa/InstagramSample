@@ -9,7 +9,6 @@
 #import "VASAuthPageViewModel.h"
 
 #import "VASAuthenticationProvider.h"
-#import "SSKeychain.h"
 #import "VASAPIConfigurator.h"
 
 @interface VASAuthPageViewModel()

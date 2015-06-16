@@ -9,14 +9,12 @@
 #import "VASResourceManager.h"
 
 #import "AFNetworking.h"
-#import "SSKeychain.h"
 #import "VASSessionManager.h"
 #import "VASUser.h"
 #import "VASMedia.h"
 #import "VASAPIConfigurator.h"
 
 // Users methods
-
 static NSString *const kUserInfoAPIMethod = @"users/%@";
 static NSString *const kUserRecentMediaAPIMethod = @"users/%@/media/recent";
 static NSString *const kUserSelfFeedAPIMethod = @"users/self/feed";
@@ -24,7 +22,6 @@ static NSString *const kUserFollowsListMethod = @"users/%@/follows";
 static NSString *const kUserFollowedByListMethod = @"users/%@/followed-by";
 
 // Media methods
-
 static NSString *const kMediaInfoAPIMethod = @"media/%@";
 static NSString *const kPopularMediaAPIMethod = @"media/popular";
 
@@ -123,7 +120,7 @@ static NSString *const kPopularMediaAPIMethod = @"media/popular";
                                         failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kUserFollowsListMethod
+                                            URLString:[NSString stringWithFormat:kUserFollowsListMethod, userID]
                                            parameters:nil
                                           resultClass:[VASUser class]
                                                forKey:@"data"
@@ -146,7 +143,7 @@ static NSString *const kPopularMediaAPIMethod = @"media/popular";
                                            failure:(ResourceManagerCompletionBlockWithFailure)failure
 {
     NSURLSessionDataTask *task = [self.manager method:VASHTTPMethodGET
-                                            URLString:kUserFollowedByListMethod
+                                            URLString:[NSString stringWithFormat:kUserFollowedByListMethod, userID]
                                            parameters:nil
                                           resultClass:[VASUser class]
                                                forKey:@"data"
