@@ -15,6 +15,9 @@
 
 @property (nonatomic, strong) VASHomePageViewModel *viewModel;
 
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *userPictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
@@ -30,6 +33,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width, 0)];
+    [self.refreshControl addTarget:self action:@selector(reloadPage) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView addSubview:self.refreshControl];
+    self.refreshControl.rac_command = self.viewModel.updatePage;
     
     _viewModel = [VASHomePageViewModel new];
     [self bindUI];
@@ -49,6 +57,13 @@
     RAC(self.countFollowersLabel, text) = RACObserve(self.viewModel, countFollowersLabelString);
     RAC(self.countFollowingLabel, text) = RACObserve(self.viewModel, countFollowingLabelString);
 }
+
+- (void)reloadPage
+{
+    [self.viewModel reloadPage];
+    [self.refreshControl endRefreshing];
+}
+
 - (IBAction)logout:(id)sender
 {
     [self.viewModel logoutFromAccount];

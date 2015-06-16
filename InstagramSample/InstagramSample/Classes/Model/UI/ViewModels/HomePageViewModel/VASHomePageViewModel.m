@@ -60,19 +60,9 @@
     [CredentialStorage resetAccessToken];
 }
 
-- (RACCommand *)updatePage
+- (void)reloadPage
 {
-    return [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-       
-        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-           
-            [self loadData];
-
-            [subscriber sendNext:nil];
-            [subscriber sendCompleted];
-            return nil;
-        }];
-    }];
+    [self loadData];
 }
 
 @end

@@ -62,13 +62,15 @@
                                                   {
                                                       NSString *accessToken = responseObject[@"access_token"];
                                                       
-                                                      VASUser *user = [MTLJSONAdapter modelOfClass:[VASUser class]
-                                                                                fromJSONDictionary:responseObject[@"user"]
-                                                                                             error:NULL];
-                                                      
-                                                      [CredentialStorage setCurrentAuthenticatedUserID:user.uid];
-                                                      
                                                       if (accessToken) {
+                                                          [CredentialStorage setAccessToken:accessToken];
+                                                          
+                                                          VASUser *user = [MTLJSONAdapter modelOfClass:[VASUser class]
+                                                                                    fromJSONDictionary:responseObject[@"user"]
+                                                                                                 error:NULL];
+                                                          
+                                                          [CredentialStorage setCurrentAuthenticatedUserID:user.uid];
+                                                          
                                                           success(task, accessToken);
                                                       }
                                                   }

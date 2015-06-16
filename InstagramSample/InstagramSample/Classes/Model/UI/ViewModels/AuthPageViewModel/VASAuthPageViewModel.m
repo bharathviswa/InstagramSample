@@ -41,7 +41,6 @@
     [self.authProvider requestAccessTokenWithResponseCode:responseCode
                                                   success:^(NSURLSessionDataTask *task, NSString *accessToken) {
                                                       if (accessToken) {
-                                                          [CredentialStorage setAccessToken:accessToken];
                                                           success(YES);
                                                       }
                                                       else
