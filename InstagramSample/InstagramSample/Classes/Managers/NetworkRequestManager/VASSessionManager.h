@@ -42,5 +42,4 @@ typedef NS_ENUM(NSUInteger, VASHTTPMethod) {
                           forKey:(NSString *)key
                          success:(SessionManagerCompletionBlockWithSuccess)success
                          failure:(SessionManagerCompletionBlockWithFailure)failure;
-
 @end

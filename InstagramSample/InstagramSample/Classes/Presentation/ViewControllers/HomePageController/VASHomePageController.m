@@ -41,7 +41,6 @@
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width, 0)];
     [self.refreshControl addTarget:self action:@selector(reloadPage) forControlEvents:UIControlEventValueChanged];
     [self.scrollView addSubview:self.refreshControl];
-    self.refreshControl.rac_command = self.viewModel.updatePage;
     
     _viewModel = [VASHomePageViewModel new];
     [self bindUI];
@@ -82,6 +81,7 @@
 - (IBAction)logout:(id)sender
 {
     [self.viewModel logoutFromAccount];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"startPage"];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];

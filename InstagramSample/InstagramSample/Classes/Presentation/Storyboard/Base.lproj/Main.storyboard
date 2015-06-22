@@ -192,7 +192,6 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="jsf-lr-T2L" secondAttribute="trailing" id="8LW-hy-A8f"/>
                                     <constraint firstItem="zuZ-DB-bAJ" firstAttribute="leading" secondItem="htO-VL-BNp" secondAttribute="leading" id="8ME-Bt-Che"/>
-                                    <constraint firstAttribute="height" constant="504" id="L6q-Ri-dmu"/>
                                     <constraint firstAttribute="trailing" secondItem="zuZ-DB-bAJ" secondAttribute="trailing" id="Qjv-L5-aMo"/>
                                     <constraint firstAttribute="width" secondItem="jsf-lr-T2L" secondAttribute="width" id="THh-FC-8ec"/>
                                     <constraint firstAttribute="bottom" secondItem="zuZ-DB-bAJ" secondAttribute="bottom" constant="291" id="XpX-j7-biz"/>
@@ -208,6 +207,7 @@
                             <constraint firstItem="htO-VL-BNp" firstAttribute="top" secondItem="dLB-cz-DzM" secondAttribute="top" id="4Ha-1p-Bzq"/>
                             <constraint firstItem="htO-VL-BNp" firstAttribute="leading" secondItem="dLB-cz-DzM" secondAttribute="leading" id="OnO-dG-fdI"/>
                             <constraint firstAttribute="trailing" secondItem="htO-VL-BNp" secondAttribute="trailing" id="Xev-IT-X4x"/>
+                            <constraint firstAttribute="bottom" secondItem="htO-VL-BNp" secondAttribute="bottom" id="oQS-rv-aq9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4sO-KD-Az6">
